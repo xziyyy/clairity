@@ -3,7 +3,7 @@
 ```bash
 pkg update && pkg upgrade
 pkg install git -y
-pkg install nodejs
+pkg install nodejs-lts
 pkg install ffmpeg -y
 git clone https://github.com/xziyyy/clairity.git
 cd clairity
