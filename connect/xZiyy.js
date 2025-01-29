@@ -171,12 +171,12 @@ let setting = global.db.data.settings[botNumber]
 if (typeof setting !== 'object') global.db.data.settings[botNumber] = {}
 if (setting) {
  if (!('autoread' in setting)) setting.autoread = false
-if (!("public" in settings)) settings.public = false
-if (!('onlygrub' in setting)) setting.onlygrub = true
+if (!("public" in settings)) settings.public = true
+if (!('onlygrub' in setting)) setting.onlygrub = false
 } else global.db.data.settings[botNumber] = {
  autoread: false,
- public: false,
- onlygrub: true,
+ public: true,
+ onlygrub: false,
 }
 } catch (err) {
 }
