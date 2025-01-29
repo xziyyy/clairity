@@ -21,4 +21,4 @@ Run
 npm start
 ```
 
-License: [```https://github.com/xziyyy/clairity/blob/master/LICENSE```]
+[License:](https://choosealicense.com/licenses/mit/)
