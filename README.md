@@ -1,5 +1,3 @@
-Berikut adalah teks yang ada di gambar tersebut:
-
 ## For Termux/Ubuntu/SSH User
 
 ```bash
@@ -7,9 +5,8 @@ pkg update && pkg upgrade
 pkg install git
 pkg install nodejs
 pkg install ffmpeg
-pkg install imagemagick
-git clone https://github.com/nazedev/hitori
-cd hitori
+git clone https://github.com/xziyyy/clairity.git
+cd clairity
 npm install
 ```
 
@@ -24,4 +21,4 @@ Run
 npm start
 ```
 
-License: MIT
+License: [```https://github.com/xziyyy/clairity/blob/master/LICENSE```]
