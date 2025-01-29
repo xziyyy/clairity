@@ -12,8 +12,6 @@ const version = require("@whiskeysockets/baileys/package.json").version
 // contoh ['1','2','3']
 // ['1','2','3','4']
 global.botname = "Clairity Bot"
-global.ownername = 'xZiyy';
-global.owner = '6283804078729';
 global.ownerNumber = [`${global.owner}`,'no2','no3'] // no owner yang dapat mengakses all fitur
 global.email = '@gmail.com' // kosongkan jika tidak punya
 global.web = '.com' // kosongkan jika tidak punya
