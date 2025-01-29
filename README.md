@@ -21,4 +21,4 @@ Run
 npm start
 ```
 
-[License:](https://choosealicense.com/licenses/mit/)
+License: [MIT](https://choosealicense.com/licenses/mit/)
