@@ -20,5 +20,10 @@ Run
 ```bash
 npm start
 ```
+Editing on Termux
+```bash
+npm install mc -y
+mc
+```
 
 License: [MIT](https://choosealicense.com/licenses/mit/)
