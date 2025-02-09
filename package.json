@@ -28,7 +28,7 @@
     "google-it": "^1.6.2",
     "got": "^11.8.3",
     "human-readable": "^0.2.1",
-    "jimp": "^0.16.1",
+    "jimp": "^0.22.12",
     "jsdom": "^16.4.0",
     "lowdb": "^2.1.0",
     "moment-timezone": "^0.5.34",
