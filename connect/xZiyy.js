@@ -285,6 +285,37 @@ const reply = async (teks) => {
       }
     }
 
+
+//+++++++[ antilin ]++++++++++
+
+  const antilinkgcList = JSON.parse(fs.readFileSync("./media/database/antilinkgc.json"));
+    const antisalurgc = m.isGroup ? antilinkgcList.includes(from) : false;
+
+  if (antisalurgc) {
+      if (budy.match('chat.whatsapp.com/')) {
+        if (isAdmins) return;
+        if (m.key.fromMe) return;
+        if (isCreator) return;
+        await fuzzy.sendMessage(m.chat, {
+          delete: {
+            remoteJid: m.chat,
+            fromMe: false,
+            id: m.key.id,
+            participant: m.key.participant
+          }
+        });
+        fuzzy.sendMessage(from, {
+          text: `@${m.sender.split("@")[0]} Detected a WhatsApp group link and it has been deleted.`,
+          contextInfo: {
+            mentionedJid: [m.sender]
+          }
+        }, {
+          quoted: fvrif
+        })
+
+      }
+    }
+
  const pickRandom = (arr) => {
   return arr[Math.floor(Math.random() * arr.length)];
 };
@@ -368,12 +399,14 @@ Hai haii ${ucapanWaktu} 👋
 ┗─────────────❐
 
 ┏─『 \`ARTIFICIAL\` 』
+│ ⿻ ${prefix}ai on/off
 │ ⿻ ${prefix}yousearch
 │ ⿻ ${prefix}cody
 │ ⿻ ${prefix}flux 
 ┗─────────────❐
 
 ┏─『 \`GROUP\` 』
+│ ⿻ ${prefix}antilinkgc
 │ ⿻ ${prefix}linkgroup
 │ ⿻ ${prefix}setppgroup
 │ ⿻ ${prefix}kick
@@ -385,12 +418,12 @@ Hai haii ${ucapanWaktu} 👋
 
 ┏─『 \`MAKER\` 』
 │ ⿻ ${prefix}brat text
+│ ⿻ ${prefix}bratvideo text
 │ ⿻ ${prefix}sticker
 │ ⿻ ${prefix}stickergif
 │ ⿻ ${prefix}qc
 │ ⿻ ${prefix}qcwhite
 │ ⿻ ${prefix}wasted
-│ ⿻ ${prefix}ytcomment
 ┗─────────────❐
 
 ┏─『 \`STICKER\` 』
@@ -408,6 +441,7 @@ Hai haii ${ucapanWaktu} 👋
 ┗─────────────❐
 
 ┏─『 \`SEARCH\` 』
+│ ⿻ ${prefix}pinterest
 │ ⿻ ${prefix}rumaysho
 │ ⿻ ${prefix}caribuku
 │ ⿻ ${prefix}kajian
@@ -418,6 +452,12 @@ Hai haii ${ucapanWaktu} 👋
 ┏─『 \`BERITA\` 』
 │ ⿻ ${prefix}gempa
 │ ⿻ ${prefix}liputan6
+┗─────────────❐
+
+┏─『 \`STALKER \` 』
+│ ⿻ ${prefix}tikstalk 
+│ ⿻ ${prefix}githubstalk
+│ ⿻ ${prefix}igstalk
 ┗─────────────❐
 
 ┏─『 \`TOOLS\` 』
@@ -566,6 +606,44 @@ case 'cody': {
 }
 //======[ GROUP ]======\\
 
+      case 'antilinkgc': {
+        if (!isAdmins) return reply('You are not an admin!');
+        if (!m.isGroup) return reply('This command can only be used in groups!');
+
+        if (args[0] === "on") {
+          if (antisalurgc) return reply('Antilinkgc is already active in this group.');
+          antilinkgcList.push(from);
+          fs.writeFileSync('./media/database/antilinkgc.json', JSON.stringify(antilinkgcList));
+          reply('Antilinkgc has been enabled in this group.');
+          var groupe = await fuzzy.groupMetadata(from);
+          var members = groupe['participants'];
+          var mems = [];
+          members.map(async adm => {
+            mems.push(adm.id.replace('c.us', 's.whatsapp.net'));
+          });
+          fuzzy.sendMessage(from, {
+            text: `⚠️ Warning ⚠️\n\nPlease be aware of group links being shared in this group.`,
+            contextInfo: {
+              mentionedJid: mems
+            }
+          }, {
+            quoted: m
+          });
+        }
+        else if (args[0] === "off") {
+          if (!antisalurgc) return reply('Antilinkgc is not active in this group.');
+          let off = antilinkgcList.indexOf(from);
+          antilinkgcList.splice(off, 1);
+          fs.writeFileSync('./media/database/antilinkgc.json', JSON.stringify(antilinkgcList));
+          reply('Antilinkgc has been disabled in this group.');
+        }
+        else {
+          await reply(`Please choose an option: \n\nExample: ${prefix + command} on\nExample: ${prefix + command} off\n\n'on' to enable\n'off' to disable`);
+        }
+      }
+      break;
+
+
 case 'setppgroup':
 case 'setppgrup':
 case 'setppgc': {
@@ -674,6 +752,37 @@ case 'kick': {
 }
 break
 //======[ DOWNLOAD ]======\\
+case 'ccdwn':
+case 'capcut':{
+  if (!text) return m.reply('Silahkan masukkan URL CapCut yang ingin diunduh!')
+  
+  m.reply('Sedang memproses, mohon tunggu...')
+  
+  try {
+    const apiUrl = `https://jazxcode.biz.id/downloader/capcutdl?url=${text}`
+    const response = await fetch(apiUrl)
+    const data = await response.json()
+    
+    if (data.status) {
+      const videoUrl = data.result.videoUrl
+      
+      await fuzzy.sendMessage(m.chat, {
+        video: {
+          url: videoUrl,
+        },
+        caption: `🎥 Video CapCut berhasil diunduh`,
+        fileName: `capcut.mp4`,
+        mimetype: 'video/mp4'
+      });
+    } else {
+      m.reply('Gagal mengunduh video, periksa URL dan coba lagi.')
+    }
+  } catch (error) {
+    console.error(error)
+    m.reply('Terjadi kesalahan saat mengunduh video.')
+  }
+}
+break
 case 'igdl': {
   reply('Tunggu sebentar, sedang mengunduh video dari Instagram...');
 
@@ -1017,6 +1126,38 @@ case 'play': {
 }
 break
 //======[ SEARCH ]======\\
+case 'pin':
+case 'pinterest': {
+    if (!args[0]) return m.reply("Masukkan kata kunci pencarian! Contoh: *!pinterest cat*");
+
+    let query = args.join(" ");
+    let url = `https://api.siputzx.my.id/api/s/pinterest?query=${encodeURIComponent(query)}`;
+
+    try {
+        let response = await fetch(url);
+        let data = await response.json();
+
+        if (!data.status || !Array.isArray(data.data) || data.data.length === 0) {
+            return m.reply("Gagal mengambil gambar. Coba kata kunci lain!");
+        }
+
+        let images = data.data.slice(0, 3); // Ambil 3 gambar pertama
+
+        let mediaArray = images.map(item => ({
+            image: { url: item.images_url },
+            caption: `📌 *Pin:* ${item.pin}\n📆 *Tanggal:* ${item.created_at}\n🖼️ *Judul:* ${item.grid_title || "Tidak ada"}`
+        }));
+
+        for (let media of mediaArray) {
+            await fuzzy.sendMessage(from, media, { quoted: m });
+        }
+
+    } catch (error) {
+        console.error(error);
+        m.reply("Terjadi kesalahan saat mengambil data.");
+    }
+}
+break;
 case 'kuromi': {
   try {
     let query = 'kuromi';
@@ -1375,19 +1516,21 @@ case 'ssweb': {
   fuzzy.sendFile(m?.chat, ss, "", "Done", m);
 }
 break;
-case 'tourl': {
-  let q = m.quoted ? m.quoted : m
-  let mime = (q.msg || q).mimetype || ''
-  if (!mime) return reply(' reply media')
-  let media = await q.download()
-  let uploadImage = require('../library/uploadImage')
-  let isTele = /image\/(png|jpe?g|gif)|video\/mp4|audio\/mpeg/.test(mime);
-  let link = await (isTele ? uploadImage : "not found")(media)
-  reply(`${link}
-${media.length} Byte(s)
-${isTele ? '(Tidak Ada Tanggal Kedaluwarsa)' : '(Tidak diketahui)'}`)
-}
-break
+    case 'tourl': {
+        if (!quoted) return reply(`Send/Reply Media With Captions ${prefix + command}`)
+        try {
+          let media = await fuzzy.downloadAndSaveMediaMessage(quoted, makeid(5))
+          let url = await exec(`curl -F "reqtype=fileupload" -F "userhash=" -F "fileToUpload=@${media}" https://catbox.moe/user/api.php`, (error, stdout, stderr) => {
+            console.log(stdout)
+            return reply(stdout)
+          })
+        }
+        catch (error) {
+          console.log(error)
+          return reply("Error...")
+        }
+      }
+      break
 case 'translate': {
 
   async function fetchTranslation(text, target) {
@@ -1552,27 +1695,35 @@ case 'owner': {
 }
 break
 case 'setimgmenu': {
-  let q = m.quoted ? m.quoted : m
-  let mime = (q.msg || q).mimetype || ''
-  if (!mime) return reply('reply image')
-  let media = await q.download()
-  let uploadImage = require('../library/uploadImage')
-  let isTele = /image\/(png|jpe?g|gif)|video\/mp4|audio\/mpeg/.test(mime);
-  let link = await (isTele ? uploadImage : "not found")(media)
-  global.menuimgUrl = link
+         if (!quoted) return reply(`Send/Reply Media With Captions ${prefix + command}`)
+        try {
+          let media = await fuzzy.downloadAndSaveMediaMessage(quoted, makeid(5))
+          let url = await exec(`curl -F "reqtype=fileupload" -F "userhash=" -F "fileToUpload=@${media}" https://catbox.moe/user/api.php`, (error, stdout, stderr) => {
+  global.menuimgUrl = stdout
   reply(`succes`)
+            })
+        }
+        catch (error) {
+          console.log(error)
+          return reply("Error...")
+        }
+
 }
 break
 case 'setimgreply': {
-  let q = m.quoted ? m.quoted : m
-  let mime = (q.msg || q).mimetype || ''
-  if (!mime) return reply('reply image')
-  let media = await q.download()
-  let uploadImage = require('../library/uploadImage')
-  let isTele = /image\/(png|jpe?g|gif)|video\/mp4|audio\/mpeg/.test(mime);
-  let link = await (isTele ? uploadImage : "not found")(media)
-  global.imgUrl = link
+         if (!quoted) return reply(`Send/Reply Media With Captions ${prefix + command}`)
+        try {
+          let media = await fuzzy.downloadAndSaveMediaMessage(quoted, makeid(5))
+          let url = await exec(`curl -F "reqtype=fileupload" -F "userhash=" -F "fileToUpload=@${media}" https://catbox.moe/user/api.php`, (error, stdout, stderr) => {
+  global.imgUrl = stdout
   reply(`succes`)
+            })
+        }
+        catch (error) {
+          console.log(error)
+          return reply("Error...")
+        }
+
 }
 break
 case 'setbotname': {
@@ -1654,6 +1805,300 @@ case 'ai': {
   }
 }
 break
+//++++++++[ STICKER ]++++++++++
+      case 'bratvidio': 
+      case 'bratvideo': {
+        const ongoingCommands = new Set(); // Set untuk melacak proses berjalan
+
+        // Cek apakah pengguna sudah menjalankan perintah
+        if (ongoingCommands.has(m.sender)) {
+          return m.reply('Maaf, masih ada perintah yang sedang berjalan. Tunggu sampai selesai.');
+        }
+
+        // Tandai pengguna sebagai sedang menjalankan perintah
+        ongoingCommands.add(m.sender);
+
+        try {
+          if (!text) return reply(`Contoh: ${prefix + command} hai`);
+          if (text.length > 250) return reply(`Karakter terbatas, max 250!`);
+
+          const {
+            execSync
+          } = require('child_process');
+          const words = text.split(" ");
+          const tempDir = path.resolve('./media/tmp');
+          if (!fs.existsSync(tempDir)) fs.mkdirSync(tempDir);
+          const framePaths = [];
+
+          for (let i = 0; i < words.length; i++) {
+            const currentText = words.slice(0, i + 1).join(" ");
+
+            const res = await axios.get(
+              `https://brat.caliphdev.com/api/brat?text=${encodeURIComponent(currentText)}`, {
+                responseType: "arraybuffer"
+              }
+            ).catch((e) => e.response);
+
+            const framePath = path.join(tempDir, `frame${i}.mp4`);
+            fs.writeFileSync(framePath, res.data);
+            framePaths.push(framePath);
+          }
+
+          const fileListPath = path.join(tempDir, "filelist.txt");
+          let fileListContent = "";
+
+          for (let i = 0; i < framePaths.length; i++) {
+            fileListContent += `file '${framePaths[i]}'\n`;
+            fileListContent += `duration 0.7\n`;
+          }
+
+          fileListContent += `file '${framePaths[framePaths.length - 1]}'\n`;
+          fileListContent += `duration 2\n`;
+
+          fs.writeFileSync(fileListPath, fileListContent);
+          const outputVideoPath = path.join(tempDir, "output.mp4");
+          execSync(
+            `ffmpeg -y -f concat -safe 0 -i ${fileListPath} -vf "fps=30" -c:v libx264 -preset ultrafast -pix_fmt yuv420p ${outputVideoPath}`
+          );
+
+          await fuzzy.sendImageAsSticker(m.chat, outputVideoPath, m, {
+            packname: `${m.pushName}\n\n\n\n\n\n\n\n${global.packname}`,
+            author: global.author,
+          });
+ 
+          framePaths.forEach((frame) => {
+            if (fs.existsSync(frame)) fs.unlinkSync(frame);
+          });
+          if (fs.existsSync(fileListPath)) fs.unlinkSync(fileListPath);
+          if (fs.existsSync(outputVideoPath)) fs.unlinkSync(outputVideoPath);
+        }
+        catch (e) {
+          console.error(e);
+          reply('Terjadi kesalahan');
+        }
+        finally {
+          ongoingCommands.delete(m.sender); // Hapus pengguna dari daftar proses berjalan
+        }
+        break;
+      }
+case 'igstalk': {
+    if (!args[0]) return m.reply("Masukkan username Instagram! Contoh: *#stalkig siputzx_*");
+
+    let username = args[0];
+    let url = `https://api.siputzx.my.id/api/stalk/Instagram?user=${username}`;
+
+    try {
+        let response = await fetch(url);
+        let data = await response.json();
+
+        if (!data.status) return m.reply("Gagal mengambil data. Pastikan username benar.");
+
+        let user = data.data.user;
+        let result = `*Instagram Stalker*\n\n` +
+            `🔹 *Username:* ${user.username}\n` +
+            `🔹 *Full Name:* ${user.full_name}\n` +
+            `🔹 *Bio:* ${user.biography}\n` +
+            `🔹 *Kategori:* ${user.category || "Tidak ada"}\n` +
+            `🔹 *Followers:* ${user.follower_count}\n` +
+            `🔹 *Following:* ${user.following_count}\n` +
+            `🔹 *Posts:* ${user.media_count}\n` +
+            `🔹 *Verified:* ${user.is_verified ? "✅ Yes" : "❌ No"}\n` +
+            `🔹 *Private:* ${user.is_private ? "🔒 Yes" : "🔓 No"}\n` +
+            `🔹 *Business Account:* ${user.is_business ? "✅ Yes" : "❌ No"}\n` +
+            `🔹 *External URL:* ${user.external_url || "Tidak ada"}\n`;
+
+        let profilePic = user.hd_profile_pic ? user.hd_profile_pic.url : user.profile_pic_url;
+        
+        fuzzy.sendMessage(from, { image: { url: profilePic }, caption: result }, { quoted: m });
+    } catch (error) {
+        console.error(error);
+        m.reply("Terjadi kesalahan saat mengambil data.");
+    }
+}
+break;
+    case 'tiktokstalk':
+  case 'tikstalk': {
+        if (!text) return m.reply('Masukkan username TikTok');
+
+        try {
+          // Validasi input username
+          if (!text.trim()) return m.reply('Username tidak boleh kosong');
+
+          // Ambil data dari API
+          const response = await axios.get(`https://api.siputzx.my.id/api/stalk/tiktok?username=${text}`);
+          const userData = response.data.data;
+
+          // Susun pesan dengan SELURUH informasi yang didapatkan
+          let pesan = `*📋 INFORMASI AKUN TIKTOK LENGKAP* 
+
+👤 *PROFIL DASAR*
+• Nama Panggilan: ${userData.user.nickname}
+• ID Pengguna: ${userData.user.id}
+• ID Unik: ${userData.user.uniqueId}
+• Short ID: ${userData.user.shortId || 'Tidak tersedia'}
+• Sec UID: ${userData.user.secUid}
+• Bio: ${userData.user.signature}
+• Wilayah: ${userData.user.region}
+• Bahasa: ${userData.user.language}
+
+🔍 *STATUS AKUN*
+• Terverifikasi: ${userData.user.verified ? 'Ya' : 'Tidak'}
+• Akun Pribadi: ${userData.user.privateAccount ? 'Ya' : 'Tidak'}
+• Akun Rahasia: ${userData.user.secret ? 'Ya' : 'Tidak'}
+• Organisasi: ${userData.user.isOrganization ? 'Ya' : 'Tidak'}
+
+📊 *STATISTIK*
+• Pengikut: ${userData.stats.followerCount.toLocaleString()}
+• Mengikuti: ${userData.stats.followingCount.toLocaleString()}
+• Total Like: ${userData.stats.heartCount.toLocaleString()}
+• Jumlah Video: ${userData.stats.videoCount.toLocaleString()}
+• Jumlah Disukai: ${userData.stats.diggCount.toLocaleString()}
+• Jumlah Teman: ${userData.stats.friendCount.toLocaleString()}
+
+🖼️ *AVATAR*
+• Avatar Besar: ${userData.user.avatarLarger}
+• Avatar Sedang: ${userData.user.avatarMedium}
+• Avatar Kecil: ${userData.user.avatarThumb}
+
+⚙️ *PENGATURAN*
+• Pengaturan Komentar: ${userData.user.commentSetting}
+• Pengaturan Duet: ${userData.user.duetSetting}
+• Pengaturan Stitch: ${userData.user.stitchSetting}
+• Pengaturan Download: ${userData.user.downloadSetting}
+
+🌐 *TAUTAN & KONEKSI*
+• Tautan Bio: ${userData.user.bioLink?.link || 'Tidak tersedia'}
+• Risiko Tautan: ${userData.user.bioLink?.risk || 'Tidak diketahui'}
+
+📅 *INFORMASI WAKTU*
+• Waktu Pembuatan Akun: ${new Date(userData.user.createTime * 1000).toLocaleString()}
+• Waktu Modifikasi Nama: ${new Date(userData.user.nickNameModifyTime * 1000).toLocaleString()}
+
+🎵 *TAB PROFIL*
+• Tab Musik: ${userData.user.profileTab.showMusicTab ? 'Aktif' : 'Tidak Aktif'}
+• Tab Pertanyaan: ${userData.user.profileTab.showQuestionTab ? 'Aktif' : 'Tidak Aktif'}
+• Tab Playlist: ${userData.user.profileTab.showPlayListTab ? 'Aktif' : 'Tidak Aktif'}
+
+🏷️ *INFORMASI TAMBAHAN*
+• Pengguna Komersial: ${userData.user.commerceUserInfo?.commerceUser ? 'Ya' : 'Tidak'}
+• Jual di TikTok: ${userData.user.ttSeller ? 'Ya' : 'Tidak'}
+• Visibilitas Mengikuti: ${userData.user.followingVisibility}
+• Room ID: ${userData.user.roomId || 'Tidak tersedia'}`;
+
+          // Kirim pesan
+          m.reply(pesan);
+
+        }
+        catch (error) {
+          console.error('Error:', error);
+
+          // Tangani berbagai jenis kesalahan
+          if (error.response) {
+            // Kesalahan respons dari server
+            if (error.response.status === 404) {
+              m.reply('Username TikTok tidak ditemukan');
+            }
+            else {
+              m.reply(`Gagal mengambil data. Status: ${error.response.status}`);
+            }
+          }
+          else if (error.request) {
+            // Permintaan terkirim tapi tidak ada respons
+            m.reply('Tidak ada respons dari server');
+          }
+          else {
+            // Kesalahan lainnya
+            m.reply('Terjadi kesalahan saat mengambil data');
+          }
+        }
+      }
+      break;
+      case 'githubstalk': {
+        if (!text) return m.reply('Masukkan username GitHub');
+
+        try {
+          // Validasi input username
+          if (!text.trim()) return m.reply('Username tidak boleh kosong');
+
+          // Ambil data dari API
+          const response = await axios.get(`https://api.siputzx.my.id/api/stalk/github?user=${text}`);
+          const userData = response.data.data;
+
+          // Konversi tanggal
+          const createdAt = new Date(userData.created_at).toLocaleString('id-ID', {
+            dateStyle: 'full',
+            timeStyle: 'long'
+          });
+          const updatedAt = new Date(userData.updated_at).toLocaleString('id-ID', {
+            dateStyle: 'full',
+            timeStyle: 'long'
+          });
+
+          // Susun pesan dengan informasi yang didapatkan
+          let pesan = `*📋 INFORMASI PROFIL GITHUB* 
+
+👤 *IDENTITAS*
+• Username: ${userData.username}
+• Nama Lengkap: ${userData.nickname}
+• ID Pengguna: ${userData.id}
+• Node ID: ${userData.nodeId}
+• Tipe Akun: ${userData.type}
+
+📝 *INFORMASI PROFIL*
+• Bio: ${userData.bio || 'Tidak ada bio'}
+• Perusahaan: ${userData.company || 'Tidak disebutkan'}
+• Blog/Website: ${userData.blog || 'Tidak ada'}
+• Lokasi: ${userData.location || 'Tidak disebutkan'}
+• Email: ${userData.email || 'Tidak publik'}
+
+🔢 *STATISTIK*
+• Repository Publik: ${userData.public_repo}
+• Gist Publik: ${userData.public_gists}
+• Pengikut: ${userData.followers}
+• Mengikuti: ${userData.following}
+
+🖼️ *AVATAR*
+• Foto Profil: ${userData.profile_pic}
+
+🔗 *TAUTAN*
+• Profil GitHub: ${userData.url}
+
+📅 *INFORMASI WAKTU*
+• Akun Dibuat: ${createdAt}
+• Terakhir Diperbarui: ${updatedAt}
+
+⚙️ *STATUS TAMBAHAN*
+• Admin: ${userData.admin ? 'Ya' : 'Tidak'}`;
+
+          // Kirim pesan
+          m.reply(pesan);
+
+        }
+        catch (error) {
+          console.error('Error:', error);
+
+          // Tangani berbagai jenis kesalahan
+          if (error.response) {
+            // Kesalahan respons dari server
+            if (error.response.status === 404) {
+              m.reply('Username GitHub tidak ditemukan');
+            }
+            else {
+              m.reply(`Gagal mengambil data. Status: ${error.response.status}`);
+            }
+          }
+          else if (error.request) {
+            // Permintaan terkirim tapi tidak ada respons
+            m.reply('Tidak ada respons dari server');
+          }
+          else {
+            // Kesalahan lainnya
+            m.reply('Terjadi kesalahan saat mengambil data');
+          }
+        }
+      }
+      break;
+
 default:
   function resetSession(user) {
     if (global.db.data.users[user]?.aiSession) {
