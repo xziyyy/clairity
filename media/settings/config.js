@@ -18,8 +18,8 @@ global.web = '.com' // kosongkan jika tidak punya
 global.location = 'Banten' // isi daerah mu atau tempat tinggal mu jika tidak mau kosongkan
 global.packname = 'Mayura bot' // wm yg ada di sticker
 global.author = 'dibuat oleh xZiyy' // wm yg ada di sticker
-global.imgUrl = "https://8030.us.kg/file/3BKmPkUiRgkn.jpg" // ubah menggunakan !setimgbot
-global.menuimgUrl = "https://8030.us.kg/file/e5W16g7sTj27.jpg" // ubah menggunakan !setimgmenu
+global.imgUrl = "https://files.catbox.moe/8cmckf.jpg" // ubah menggunakan !setimgbot
+global.menuimgUrl = "https://files.catbox.moe/bfwpip.jpg" // ubah menggunakan !setimgmenu
 
 global.idch = "channel kalian"
 global.namech = "- Mayura bot -"
