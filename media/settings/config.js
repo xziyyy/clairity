@@ -21,8 +21,8 @@ global.author = 'dibuat oleh ZVex' // wm yg ada di sticker
 global.imgUrl = "https://files.catbox.moe/8cmckf.jpg" // ubah menggunakan !setimgbot
 global.menuimgUrl = "https://files.catbox.moe/bfwpip.jpg" // ubah menggunakan !setimgmenu
 
-global.idch = "channel kalian"
-global.namech = "- Mayura bot -"
+global.idch = "channel"
+global.namech = "- ZBots ofc -"
 
 global.mess = {
     group: "Fitur Hanya Digunakan Untuk Grup!",
