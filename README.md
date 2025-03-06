@@ -25,7 +25,7 @@ Editing on Termux
 npm install mc -y
 mc
 ```
-
+ 
 edit file in ./media/settings/config.js
 ```bash
 global.botname = "Clairity Bot" // bot name
