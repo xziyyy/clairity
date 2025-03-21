@@ -55,6 +55,28 @@ const more = String.fromCharCode(8206);
 const readmore = more.repeat(4001);
 const { bytesToSize, getRandomFile, smsg, checkBandwidth, sleep, formatSize, getRandom, format, getBuffer, isUrl, jsonformat, nganuin, pickRandom, runtime, shorturl, formatp, fetchJson, color, getGroupAdmins } = require("../library/myfunc");
 const { addExif } = require('../library/exif')
+const yetedln = require("../media/scraper/yetedln")
+const apiUrlw = 'https://clairity-nine.vercel.app'
+
+// game
+// read database
+let tebaklagu = []
+let kuismath = []
+let tebakgambar = []
+let tebakkata = []
+let tebakkalimat = []
+let tebaklirik = []
+let tebaktebakan = []
+let tebakbendera = []
+let tebakbendera2 = []
+let tebakkabupaten = []
+let tebakkimia = []
+let tebakasahotak = []
+let tebaksiapakahaku = []
+let tebaksusunkata = []
+let tebaktekateki = []
+let tebakjkt48 = []
+let _family100 = db.data.game.family100 = []
 
 module.exports = fuzzy = async (fuzzy, m, msg, chatUpdate, store) => {
 const { type, sender, pushname, isGroup } = m
@@ -341,11 +363,290 @@ const pw = crypto.randomBytes(5).toString('hex')
             return reply(`Hello buddy! Because We Want to Reduce Spam, Please Use Bot in the Group\n\nhttps://chat.whatsapp.com/HeXU27T77XaCGZYLjZGoVk !\n\nIf you have issue please chat owner wa.me/${global.ownerNumber}`)
             }
         }
+        
+        
+    //GAME
+    if (tebakgambar.hasOwnProperty(from) && !isCmd && !m.key.fromMe && m.quoted && m.quoted.sender === botNumber) {
+      kuis = true
+      jawaban = tebakgambar[from]
+      if (budy.toLowerCase() == "nyerah") {
+        await reply('*Anda Telah menyerah*')
+        delete tebakgambar[from]
+      }
+      else if (budy.toLowerCase() == jawaban) {
+
+        await fuzzy.sendText(m.chat, `🎮 Tebak Gambar 🎮\n\nCongratulation  `, m)
+        benefit = "300"
+        
+    
+        delete tebakgambar[from]
+      }
+      else m.reply('*Jawaban Salah!*')
+    }
+    if (kuismath.hasOwnProperty(from) && !isCmd && !m.key.fromMe && m.quoted && m.quoted.sender === botNumber) {
+      kuis = true
+      jawaban = kuismath[from]
+
+      if (budy.toLowerCase() == "nyerah") {
+        await reply('*Anda Telah menyerah*')
+        delete kuismath[from]
+      }
+      else if (budy.toLowerCase() == jawaban) {
+
+        await reply(`🎮 Kuis Matematika  🎮\n\nCongratulation\n\nwanna play again? type ${prefix}tebak math`)
+        benefit = "300"
+        
+
+        delete kuismath[from]
+      }
+      else m.reply('*Jawaban Salah!*')
+    }
+    if (tebakasahotak.hasOwnProperty(from) && !isCmd && !m.key.fromMe && m.quoted && m.quoted.sender === botNumber) {
+      kuis = true
+      jawaban = tebakasahotak[from]
+      if (budy.toLowerCase() == "nyerah") {
+        await reply('*Anda Telah menyerah*')
+        delete tebakasahotak[from]
+      }
+      else if (budy.toLowerCase() == jawaban) {
+
+        await fuzzy.sendText(m.chat, `🎮 Asah Otak 🎮\n\nCongratulation  `, m)
+        benefit = "300"
+        
+
+        delete tebakasahotak[from]
+      }
+      else m.reply('*Jawaban Salah!*')
+    }
+    if (tebaksiapakahaku.hasOwnProperty(from) && !isCmd && !m.key.fromMe && m.quoted && m.quoted.sender === botNumber) {
+      kuis = true
+      jawaban = tebaksiapakahaku[from]
+      if (budy.toLowerCase() == "nyerah") {
+        await reply('*Anda Telah menyerah*')
+        delete tebaksiapakahaku[from]
+      }
+      else if (budy.toLowerCase() == jawaban) {
+
+        await fuzzy.sendText(m.chat, `🎮 Siapakah Aku 🎮\n\nCongratulation  `, m)
+        benefit = "300"
+        
+
+        delete tebaksiapakahaku[from]
+      }
+      else m.reply('*Jawaban Salah!*')
+    }
+    if (tebaksusunkata.hasOwnProperty(from) && !isCmd && !m.key.fromMe && m.quoted && m.quoted.sender === botNumber) {
+      kuis = true
+      jawaban = tebaksusunkata[from]
+      if (budy.toLowerCase() == "nyerah") {
+        await reply('*Anda Telah menyerah*')
+        delete tebaksusunkata[from]
+      }
+      else if (budy.toLowerCase() == jawaban) {
+
+        await fuzzy.sendText(m.chat, `🎮 Susun Kata 🎮\n\nCongratulation  `, m)
+        benefit = "300"
+        
+
+        delete tebaksusunkata[from]
+      }
+      else m.reply('*Jawaban Salah!*')
+    }
+    if (tebakbendera.hasOwnProperty(from) && !isCmd && !m.key.fromMe && m.quoted && m.quoted.sender === botNumber) {
+      kuis = true
+      jawaban = tebakbendera[from]
+      if (budy.toLowerCase() == "nyerah") {
+        await reply('*Anda Telah menyerah*')
+        delete tebakbendera[from]
+      }
+      else if (budy.toLowerCase() == jawaban) {
+
+        await fuzzy.sendText(m.chat, `🎮 Tebak Gambar 🎮\n\nCongratulation  `, m)
+        benefit = "300"
+        
+
+        delete tebakbendera[from]
+      }
+      else m.reply('*Jawaban Salah!*')
+    }
+if (tebakbendera2.hasOwnProperty(from) && !isCmd && !m.key.fromMe && m.quoted && m.quoted.sender === botNumber) {
+      kuis = true
+      jawaban = tebakbendera2[from]
+      if (budy.toLowerCase() == "nyerah") {
+        await reply('*Anda Telah menyerah*')
+        delete tebakbendera2[from]
+      }
+      else if (budy.toLowerCase() == jawaban) {
+
+        await fuzzy.sendText(m.chat, `🎮 Tebak Bendera 🎮\n\nCongratulation  `, m)
+        benefit = "300"
+        
+
+        delete tebakbendera2[from]
+      }
+      else m.reply('*Jawaban Salah!*')
+    }
+    if (tebakkabupaten.hasOwnProperty(from) && !isCmd && !m.key.fromMe && m.quoted && m.quoted.sender === botNumber) {
+      kuis = true
+      jawaban = tebakkabupaten[from]
+      if (budy.toLowerCase() == "nyerah") {
+        await reply('*Anda Telah menyerah*')
+        delete tebakkabupaten[from]
+      }
+      else if (budy.toLowerCase() == jawaban) {
+
+        await fuzzy.sendText(m.chat, `🎮 Tebak Kabupaten 🎮\n\nCongratulation  `, m)
+        benefit = "300"
+        
+
+        delete tebakkabupaten[from]
+      }
+      else m.reply('*Jawaban Salah!*')
+    }
+    if (tebakkimia.hasOwnProperty(from) && !isCmd && !m.key.fromMe && m.quoted && m.quoted.sender === botNumber) {
+      kuis = true
+      jawaban = tebakkimia[from]
+      if (budy.toLowerCase() == "nyerah") {
+        await reply('*Anda Telah menyerah*')
+        delete tebakkimia[from]
+      }
+      else if (budy.toLowerCase() == jawaban) {
+
+        await fuzzy.sendText(m.chat, `🎮 Tebak Kimia 🎮\n\nCongratulation  `, m)
+        benefit = "300"
+        
+
+        delete tebakkimia[from]
+      }
+      else m.reply('*Jawaban Salah!*')
+    }
+    if (tebaktekateki.hasOwnProperty(from) && !isCmd && !m.key.fromMe && m.quoted && m.quoted.sender === botNumber) {
+      kuis = true
+      jawaban = tebaktekateki[from]
+
+      if (budy.toLowerCase() == "nyerah") {
+        await reply('*Anda Telah menyerah*')
+        delete tebaktekateki[from]
+      }
+      else if (budy.toLowerCase() == jawaban) {
+        await fuzzy.sendText(m.chat, `🎮 Teka Teki 🎮\n\nCongratulation  `, m)
+        benefit = "300"
+        
+
+        delete tebaktekateki[from]
+      }
+      else m.reply('*Jawaban Salah!*')
+    }
+    if (tebaklagu.hasOwnProperty(from) && !isCmd && !m.key.fromMe && m.quoted && m.quoted.sender === botNumber) {
+      kuis = true
+      jawaban = tebaklagu[from]
+
+      if (budy.toLowerCase() == "nyerah") {
+        await reply('*Anda Telah menyerah*')
+        delete tebaklagu[from]
+      }
+      else if (budy.toLowerCase() == jawaban) {
+        await fuzzy.sendText(m.chat, `🎮 Tebak Lagu 🎮\n\nCongratulation  `, m)
+        benefit = "300"
+        
+
+        delete tebaklagu[from]
+      }
+      else m.reply('*Jawaban Salah!*')
+    }
+    if (tebakkata.hasOwnProperty(from) && !isCmd && !m.key.fromMe && m.quoted && m.quoted.sender === botNumber) {
+      kuis = true
+      jawaban = tebakkata[from]
+
+      if (budy.toLowerCase() == "nyerah") {
+        await reply('*Anda Telah menyerah*')
+        delete tebakkata[from]
+      }
+      else if (budy.toLowerCase() == jawaban) {
+        await fuzzy.sendText(m.chat, `🎮 Tebak Kata 🎮\n\nCongratulation  `, m)
+        benefit = "300"
+        
+
+        delete tebakkata[from]
+      }
+      else m.reply('*Jawaban Salah!*')
+    }
+    if (tebakkalimat.hasOwnProperty(from) && !isCmd && !m.key.fromMe && m.quoted && m.quoted.sender === botNumber) {
+      kuis = true
+      jawaban = tebakkalimat[from]
+
+      if (budy.toLowerCase() == "nyerah") {
+        await reply('*Anda Telah menyerah*')
+        delete tebakkalimat[from]
+      }
+      else if (budy.toLowerCase() == jawaban) {
+        await fuzzy.sendText(m.chat, `🎮 Tebak Kalimat 🎮\n\nCongratulation  `, m)
+        benefit = "300"
+        
+
+        delete tebakkalimat[from]
+      }
+      else m.reply('*Jawaban Salah!*')
+    }
+    if (tebaklirik.hasOwnProperty(from) && !isCmd && !m.key.fromMe && m.quoted && m.quoted.sender === botNumber) {
+      kuis = true
+      jawaban = tebaklirik[from]
+
+      if (budy.toLowerCase() == "nyerah") {
+        await reply('*Anda Telah menyerah*')
+        delete tebaklirik[from]
+      }
+      else if (budy.toLowerCase() == jawaban) {
+        await fuzzy.sendText(m.chat, `🎮 Tebak Lirik 🎮\n\nCongratulation  `, m)
+        benefit = "300"
+        
+
+        delete tebaklirik[from]
+      }
+      else m.reply('*Jawaban Salah!*')
+    }
+    if (tebaktebakan.hasOwnProperty(from) && !isCmd && !m.key.fromMe && m.quoted && m.quoted.sender === botNumber) {
+      kuis = true
+      jawaban = tebaktebakan[from]
+
+      if (budy.toLowerCase() == "nyerah") {
+        await reply('*Anda Telah menyerah*')
+        delete tebaktebakan[from]
+      }
+      else if (budy.toLowerCase() == jawaban) {
+        await fuzzy.sendText(m.chat, `🎮 Tebak Tebakan 🎮\n\nCongratulation  `, m)
+        benefit = "300"
+        
+
+        delete tebaktebakan[from]
+      }
+      else m.reply('*Jawaban Salah!*')
+    }
+    if (tebakjkt48.hasOwnProperty(from) && !isCmd && !m.key.fromMe && m.quoted && m.quoted.sender === botNumber) {
+      kuis = true;
+      jawaban = tebakjkt48[from];
+
+      if (budy.toLowerCase() == "nyerah") {
+        await reply('*Anda Telah menyerah*');
+        delete tebakjkt48[from];
+      }
+      else if (budy.toLowerCase() == jawaban) {
+        await fuzzy.sendText(m.chat, `🎮 Tebak Tebakan 🎮\n\nCongratulation  `, m);
+        benefit = "300"
+        
+        delete tebakjkt48[from];
+      }
+      else {
+        m.reply('*Jawaban Salah!*');
+      }
+    }
+        
+        
 switch(command) {
 case 'script':{
 reply(`
 ▧ 「 *LINK SCRIPT* 」
-│
+│ https://youtu.be/0ZBGxosFqBM?si=p96f_T9ui6o3awov
 ┗─────────────
 `)
 }
@@ -411,6 +712,8 @@ Hai haii ${ucapanWaktu} 👋
 │ ⿻ ${prefix}setppgroup
 │ ⿻ ${prefix}kick
 │ ⿻ ${prefix}add
+│ ⿻ ${prefix}everyone
+│ ⿻ ${prefix}hidetag
 │ ⿻ ${prefix}delete
 │ ⿻ ${prefix}opentime
 │ ⿻ ${prefix}closetime
@@ -435,6 +738,7 @@ Hai haii ${ucapanWaktu} 👋
 ┏─『 \`download\` 』
 │ ⿻ ${prefix}play
 │ ⿻ ${prefix}ytmp3
+│ ⿻ ${prefix}ytmp4
 │ ⿻ ${prefix}tiktok
 │ ⿻ ${prefix}tiksave
 │ ⿻ ${prefix}igdl
@@ -458,6 +762,34 @@ Hai haii ${ucapanWaktu} 👋
 │ ⿻ ${prefix}tikstalk 
 │ ⿻ ${prefix}githubstalk
 │ ⿻ ${prefix}igstalk
+┗─────────────❐
+
+┏─『 \`PRIMBON \` 』
+│ ⿻ ${prefix}top text
+│ ⿻ ${prefix}apakah [text]
+│ ⿻ ${prefix}bagaimanakah [text]
+│ ⿻ ${prefix}kapankah [text]
+│ ⿻ ${prefix}bisakah [text]
+│ ⿻ ${prefix}watakcek [text]
+│ ⿻ ${prefix}cebelapaimutci [text]
+│ ⿻ ${prefix}hobycek [text]
+┗─────────────❐
+
+┏─『 \`GAME \` 』
+│ ⿻ ${prefix}tebak kata
+│ ⿻ ${prefix}tebak tebakan
+│ ⿻ ${prefix}tebak bendera
+│ ⿻ ${prefix}tebak kalimat
+│ ⿻ ${prefix}tebak lirik
+│ ⿻ ${prefix}tebak tekateki
+│ ⿻ ${prefix}tebak siapakahaku
+│ ⿻ ${prefix}tebak asahotak
+│ ⿻ ${prefix}tebak susunkata
+│ ⿻ ${prefix}tebak kimia
+│ ⿻ ${prefix}tebak kabupaten
+│ ⿻ ${prefix}tebak gambar
+│ ⿻ ${prefix}tebak bendera2
+│ ⿻ ${prefix}tebak jkt48
 ┗─────────────❐
 
 ┏─『 \`TOOLS\` 』
@@ -561,7 +893,7 @@ case 'cody': {
   try {
     if (!text) return reply("Masukkan teks untuk mendapatkan respons.");
 
-    const apiUrl = `https://clairity.us.kg/api/cody?text=${encodeURIComponent(text)}`;
+    const apiUrl = `${apiUrlw}/api/cody?text=${encodeURIComponent(text)}`;
 
     const response = await axios.get(apiUrl);
     const {
@@ -585,7 +917,7 @@ case 'cody': {
     if (!text) return reply("Masukkan teks untuk mendapatkan respons.");
     reply('_Tunggu sebentar, sedang membuat gambar..._');
 
-    const apiUrl = `https://clairity.us.kg/api/cody?text=${encodeURIComponent(text)}`;
+    const apiUrl = `${apiUrlw}/api/cody?text=${encodeURIComponent(text)}`;
 
     const response = await axios.get(apiUrl);
     const {
@@ -605,6 +937,38 @@ case 'cody': {
   break;
 }
 //======[ GROUP ]======\\
+
+      case 'everyone': {
+        if (!isAdmins && !isCreator) return
+        let mem = m.isGroup ? await groupMetadata.participants.map(a => a.id) : ""
+        fuzzy.sendMessage(m.chat, {
+          text: `@${m.chat} ${text}`,
+          contextInfo: {
+            mentionedJid: mem,
+            groupMentions: [{
+              groupSubject: `everyone`,
+              groupJid: m.chat,
+            }, ],
+          },
+        });
+      }
+      break
+
+      case 'hidetag': {
+        if (!isAdmins && !isCreator) return
+        let mem = m.isGroup ? await groupMetadata.participants.map(a => a.id) : ""
+        fuzzy.sendMessage(m.chat, {
+          text: `${text}`,
+          contextInfo: {
+            mentionedJid: mem,
+            groupMentions: [{
+              groupSubject: ``,
+              groupJid: m.chat,
+            }, ],
+          },
+        });
+      }
+      break
 
       case 'antilinkgc': {
         if (!isAdmins) return reply('You are not an admin!');
@@ -787,7 +1151,7 @@ case 'igdl': {
   reply('Tunggu sebentar, sedang mengunduh video dari Instagram...');
 
   async function fetchInstagramVideo(url) {
-    const res = await axios.get(`https://clairity.us.kg/api/ig-indownloader?url=${encodeURIComponent(url)}`);
+    const res = await axios.get(`${apiUrlw}/api/ig-indownloader?url=${encodeURIComponent(url)}`);
     return res.data;
   }
 
@@ -822,7 +1186,7 @@ case 'tiksave': {
   reply('Tunggu sebentar, sedang mengunduh video TikTok...');
 
   async function fetchTikTokVideo(url) {
-    const res = await axios.get(`https://clairity.us.kg/api/tiksave?url=${encodeURIComponent(url)}`);
+    const res = await axios.get(`${apiUrlw}/api/tiksave?url=${encodeURIComponent(url)}`);
     return res.data;
   }
 
@@ -863,7 +1227,7 @@ case 'tiktok': {
   try {
     if (!text.startsWith('http')) return reply("Masukkan URL yang valid.");
     m.reply('_Mohon tunggu, sedang memproses..._')
-    const apiUrl = `https://clairity.us.kg/api/tiktok?url=${text}`;
+    const apiUrl = `${apiUrlw}/api/tiktok?url=${text}`;
     const response = await axios.get(apiUrl);
     const {
       status,
@@ -907,112 +1271,78 @@ case 'tiktok': {
   }
 }
 break;
-case 'ytmp3': {
-  if (!text) return m.reply(`• Example :* .ytmp3 link`)
-  m.reply('_Mohon tunggu, sedang memproses..._')
-
-  const formatAudio = ['mp3', 'm4a', 'webm', 'acc', 'flac', 'opus', 'ogg', 'wav'];
-  const formatVideo = ['360', '480', '720', '1080', '1440', '4k'];
-
-  const ddownr = {
-    download: async (url, format) => {
-      if (!formatAudio.includes(format) && !formatVideo.includes(format)) {
-        throw new Error('Format nya gk support wak, coba cek lagi listnya.');
-      }
-
-      const config = {
-        method: 'GET',
-        url: `https://p.oceansaver.in/ajax/download.php?format=${format}&url=${encodeURIComponent(url)}&api=dfcb6d76f2f6a9894gjkege8a4ab232222`,
-        headers: {
-          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
-        }
-      };
-
-      try {
-        const response = await axios.request(config);
-
-        if (response.data && response.data.success) {
-          const {
-            id,
-            title,
-            info
-          } = response.data;
-          const {
-            image
-          } = info;
-          const downloadUrl = await ddownr.cekProgress(id);
-
-          return {
-            id: id,
-            image: image,
-            title: title,
-            downloadUrl: downloadUrl
-          };
-        } else {
-          throw new Error('Failed to fetch video details.');
-        }
-      } catch (error) {
-        console.error('Error:', error);
-        throw error;
-      }
-    },
-    cekProgress: async (id) => {
-      const config = {
-        method: 'GET',
-        url: `https://p.oceansaver.in/ajax/progress.php?id=${id}`,
-        headers: {
-          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
-        }
-      };
-
-      try {
-        while (true) {
-          const response = await axios.request(config);
-
-          if (response.data && response.data.success && response.data.progress === 1000) {
-            return response.data.download_url;
-          }
-          await new Promise(resolve => setTimeout(resolve, 5000));
-        }
-      } catch (error) {
-        console.error('Error:', error);
-        throw error;
-      }
-    }
-  }
-
+ case 'ytmp3': {
+       
+  if (!text) return reply(`Gunakan dengan format ${command} link\n\nContoh:\n\n${command} link`);
+  
   try {
 
-    try {
-      const downloadResult = await ddownr.download(text, 'mp3')
-
-      if (!downloadResult || !downloadResult.downloadUrl) {
-        return m.reply('Gagal mendapatkan audio. Pastikan query valid.')
+    // Gunakan scraper baru (Ytdl function)
+    const result = await yetedln(text, "audio", "320");
+    
+    // Siapkan dokumen audio
+    let doc = {
+      audio: {
+        url: result.download
+      },
+      mimetype: 'audio/mpeg',
+      fileName: `${result.title}.mp3`,
+      contextInfo: {
+        mentionedJid: [m.sender],
+        externalAdReply: {
+          title: result.title,
+          body: `Duration: ${result.duration || "Unknown"}`,
+          thumbnailUrl: result.thumbnail,
+          mediaType: 1,
+          renderLargerThumbnail: true
+        }
       }
+    };
 
-      await fuzzy.sendMessage(m.chat, {
-        audio: {
-          url: downloadResult.downloadUrl
-        },
-        mimetype: "audio/mpeg",
-        fileName: `${downloadResult.title || 'Play Downloader'}.mp3`,
-      }, {
-        quoted: m
-      })
+    // Kirim pesan sedang diproses
+    reply(`⏳ Sedang mengunduh audio...\n\n${result.title}`);
+    
+    // Kirim audio
+    await fuzzy.sendMessage(from, doc, {
+      quoted: m
+    });
 
 
-    } catch (scraperError) {
-      console.error('Scraper error:', scraperError)
-      return m.reply('Terjadi kesalahan saat mengunduh audio. Silakan coba lagi.')
-    }
-
-  } catch (searchError) {
-    console.error('Search error:', searchError)
-    return m.reply('Terjadi kesalahan saat mencari video. Silakan coba lagi.')
+  } catch (error) {
+    console.error("Error fetching song:", error);
+    reply("Maaf, terjadi kesalahan saat mencari data lagu. Coba lagi nanti.");
   }
 }
-break
+break;
+case 'ytmp4': {
+  if (!text) return reply(`Gunakan dengan format ${command} link\n\nContoh:\n\n${command} link`);
+          
+  try {
+    // Tentukan kualitas video, default ke 720p jika tidak ditentukan
+    let quality = "720";
+    
+    // Gunakan scraper baru
+    const result = await yetedln(text, "video", quality);
+    
+    // Kirim pesan sedang diproses
+    reply(`⏳ Sedang mengunduh video...\n\n${result.title}\nKualitas: ${result.quality}`);
+    
+    // Kirim video
+    await fuzzy.sendMessage(from, {
+      video: { url: result.download },
+      caption: `*${result.title}*\n\n⏱️ Duration: ${result.duration || "Unknown"}\n📊 Quality: ${result.quality}\n👤 Uploader: ${result.uploader || "Unknown"}`,
+      mimetype: 'video/mp4',
+      fileName: `${result.title}.mp4`
+    }, { quoted: m });
+   
 
+    
+  } catch (error) {
+    console.error("Error fetching video:", error);
+    reply("Maaf, terjadi kesalahan saat mencari data video. Coba lagi nanti.");
+  }
+}
+break;
 case 'play': {
   if (!text) return m.reply(`• Example :* .play *[query]`)
   m.reply('_Mohon tunggu, sedang memproses..._')
@@ -1238,7 +1568,7 @@ case 'caribuku': {
     // Mengambil data dari API cari buku
     let {
       data
-    } = await axios.get(`https://clairity.us.kg/api/caribuku?query=${text}`);
+    } = await axios.get(`${apiUrlw}/api/caribuku?query=${text}`);
 
     // Cek apakah respons memiliki data buku
     if (!data || !data.length) {
@@ -1276,7 +1606,7 @@ case 'rumaysho': {
     // Mengambil data dari API Rumaysho
     let {
       data
-    } = await axios.get(`https://clairity.us.kg/api/rumaysho?query=${encodeURIComponent(text)}`);
+    } = await axios.get(`${apiUrlw}/api/rumaysho?query=${encodeURIComponent(text)}`);
 
     // Cek apakah data yang diterima bukan array kosong
     if (!data || data.length === 0) {
@@ -1312,7 +1642,7 @@ case 'kajian': {
     // Mengambil data dari API YPIA
     let {
       data
-    } = await axios.get(`https://clairity.us.kg/api/ypia?query=${encodeURIComponent(text)}`);
+    } = await axios.get(`${apiUrlw}/api/ypia?query=${encodeURIComponent(text)}`);
 
     // Cek apakah data yang diterima bukan array kosong
     if (!data || data.length === 0) {
@@ -1348,7 +1678,7 @@ case 'soundcloud': {
 
   try {
     // Mengirim request ke API dengan query
-    let response = await axios.get(`https://clairity.us.kg/api/soundcloud?query=${encodeURIComponent(text)}`);
+    let response = await axios.get(`${apiUrlw}/api/soundcloud?query=${encodeURIComponent(text)}`);
 
     // Mengambil data dari hasil API
     let results = response.data;
@@ -1382,7 +1712,7 @@ case 'gamedva': {
   try {
     if (!text) return reply("Masukkan query untuk pencarian.");
 
-    const apiUrl = `https://clairity.us.kg/api/gamedva?query=${encodeURIComponent(text)}&url=&type=searchApp`;
+    const apiUrl = `${apiUrlw}/api/gamedva?query=${encodeURIComponent(text)}&url=&type=searchApp`;
 
     const response = await axios.get(apiUrl);
     res = response.data
@@ -1412,7 +1742,7 @@ break;
 //======[ BERITA ]======\\
 case 'gempa': {
   try {
-    const apiUrl = 'https://clairity.us.kg/api/gempa';
+    const apiUrl = `${apiUrlw}/api/gempa`;
 
     const response = await axios.get(apiUrl);
     const {
@@ -1466,7 +1796,7 @@ case 'liputan6': {
 
   // Fungsi untuk mengambil data dari API
   async function fetchNews() {
-    const res = await axios.get('https://clairity.us.kg/api/liputan6');
+    const res = await axios.get(`${apiUrlw}/api/liputan6`);
     return res.data.data;
   }
 
@@ -1534,7 +1864,7 @@ break;
 case 'translate': {
 
   async function fetchTranslation(text, target) {
-    const res = await axios.get(`https://clairity.us.kg/api/translate?text=${encodeURIComponent(text)}&target=${target}`);
+    const res = await axios.get(`${apiUrlw}/api/translate?text=${encodeURIComponent(text)}&target=${target}`);
     return res.data;
   }
 
@@ -1571,7 +1901,7 @@ case 'languages': {
   reply('Tunggu sebentar, sedang mengambil daftar bahasa...');
 
   async function fetchLanguages() {
-    const res = await axios.get('https://clairity.us.kg/api/languages');
+    const res = await axios.get(`${apiUrlw}/api/languages`);
     return res.data;
   }
 
@@ -2098,7 +2428,372 @@ break;
         }
       }
       break;
+      case 'bisakah': {
+        if (!m.isGroup) return reply(acn.group)
+        const bisakah = body.slice(0)
+        const bisa = ['BISA', 'Tidak Bisa', 'Oh tentu saja bisa dong', 'Udah dari lahir dia bisa kaya gitu kak 😂˜„', 'Oh tentu saja tidak bisa', 'Wuih bisa bisa', 'Ga mao jawab ah lu wibu', 'Tentu saja bisa eh tapi boong awokawok ', 'Engga engga dia ga bisa', 'Enggaklah', 'Aku ga mao jawbab 😆™‚', 'Rahasia dong', 'Ulangi Tod gua ga paham', 'Mana gua tau anjir']
+        const keh = bisa[Math.floor(Math.random() * bisa.length)]
+        fuzzy.sendMessage(from, {
+          contextInfo: {
+            externalAdReply: {
+              showAdAttribution: true,
+              title: `primbon`,
+              previewType: "PHOTO",
+              thumbnailUrl: global.imgUrl,
+              sourceUrl: `${global.linkig}`,
+            }
+          },
+          text: '*Pertanyaan : ' + bisakah + '*\n\n*Jawaban :* ' + keh
+        }, {
+          quoted: m
+        })
+      }
+      break
+      case 'bagaimanakah': {
+        if (!m.isGroup) return m.reply('Kusus group')
+        const bagaimanakah = body.slice(0)
+        const bagai = ['Kita Kenal?', 'Nanya Terus deh', 'Tidak Tahu', 'Gua tabok boleh ?', 'Cari Aja Sendiri', 'Kurang Tahu', 'Mana Saya Tahu, Saya kan ikan', 'Hah kamu tanya sama aku trus aku tanya ke siapa dong', 'Whahahaha ga tau 😑']
+        const mana = bagai[Math.floor(Math.random() * bagai.length)]
+        fuzzy.sendMessage(from, {
+          contextInfo: {
+            externalAdReply: {
+              showAdAttribution: true,
+              title: ``,
+              body: `${ucapanWaktu}`,
+              previewType: "PHOTO",
+              thumbnailUrl: global.imgUrl,
+              sourceUrl: `${global.linkig}`,
+            }
+          },
+          text: '*Pertanyaan : ' + bagaimanakah + '*\n\n*Jawaban :* ' + mana
+        }, {
+          quoted: m
+        })
+      }
+      break
+      case 'apakah': {
+        if (!m.isGroup) return m.reply('Kusus group')
+        const apakah = body.slice(0)
+        const apa = ['iya dong jelas itu', 'Tidak lah', 'Oh tentu saja tidak', 'Yo ndak tau kok tanya saya', 'Rahasia dong', 'Au ah mending mandi', 'Bentar aku lagi berak', 'Haha mna mungkin 👻']
+        const kah = apa[Math.floor(Math.random() * apa.length)]
+        fuzzy.sendMessage(from, {
+          contextInfo: {
+            externalAdReply: {
+              showAdAttribution: true,
+              title: `primbon`,
+              body: `${ucapanWaktu}`,
+              previewType: "PHOTO",
+              thumbnailUrl: global.imgUrl,
+              sourceUrl: `wa.me/6281316643491`,
+            }
+          },
+          text: '*Pertanyaan : ' + apakah + '*\n\n*Jawaban :* ' + kah
+        }, {
+          quoted: m
+        })
+      }
+      break
+      case 'kapankah': {
+        if (!m.isGroup) return m.reply('Kusus group')
+        const kapankah = body.slice(0)
+        const kapan = ['Besok', 'Lusa', '1 Hari Lagi', '2 Hari Lagi', '3 Hari Lagi', '4 Hari Lagi', '5 Hari Lagi', '6 Hari Lagi', '1 Bulan Lagi', '2 Bulan Lagi', '3 Bulan Lagi', '4 Bulan Lagi', '5 Bulan Lagi', '6 Bulan Lagi', '7 Bulan Lagi', '8 Bulan Lagi', '9 Bulan Lagi', '10 Bulan Lagi', '11 Bulan Lagi', '1 Tahun lagi', '2 Tahun lagi', '3 Tahun lag0i', '4 Tahun lagi', '5 Tahun lagi', '6 Tahun lagi', '7 Tahun lagi', '8 Tahun lagi', '9 Tahun lagi', '10 Tahun lagi']
+        const koh = kapan[Math.floor(Math.random() * kapan.length)]
+        fuzzy.sendMessage(from, {
+          contextInfo: {
+            externalAdReply: {
+              showAdAttribution: true,
+              title: `primbon`,
+              body: `${ucapanWaktu}`,
+              previewType: "PHOTO",
+              thumbnailUrl: global.imgUrl,
+              sourceUrl: `${global.linkig}`,
+            }
+          },
+          text: '*Pertanyaan : ' + kapankah + '*\n\n*Jawaban :* ' + koh
+        }, {
+          quoted: m
+        })
+      }
+      break
+      case 'watakcek':
+        const watak = body.slice(0)
+        const wa = ['Penyayang', 'Pemurah', 'Pemarah', 'Pemaaf', 'Penurut', 'Baik', 'Baperan', 'Baik Hati', 'penyabar', 'UwU', 'top deh, pokoknya', 'Suka Membantu']
+        const tak = wa[Math.floor(Math.random() * wa.length)]
+        fuzzy.sendMessage(from, {
+          text: 'Pertanyaan : *' + watak + '*\n\nJawaban : ' + tak
+        }, {
+          quoted: m
+        })
+        break
+      case 'hobycek':
+        const hobby = body.slice(0)
+        const hob = ['Memasak', 'Membantu Atok', 'Mabar', 'Nobar', 'Sosmedtan', 'Membantu Orang lain', 'Nonton Anime', 'Nonton Drakor', 'Naik Motor', 'Nyanyi', 'Menari', 'Bertumbuk', 'Menggambar', 'Foto fotoan Ga jelas', 'Maen Game', 'Berbicara Sendiri']
+        const by = hob[Math.floor(Math.random() * hob.length)]
+        fuzzy.sendMessage(from, {
+          text: 'Pertanyaan : *' + hobby + '*\n\nJawaban : ' + by
+        }, {
+          quoted: m
+        })
+        break
+      case 'cebelapaimutci': {
+        if (!m.isGroup) return m.reply('Kusus group')
+        const edgar = body.slice(0)
+        const nanya = ['*79%*\n\nImut Banget Loh Kawai><', '*15%*\n\nKamu imut kata mamakmu:v🗿', '*30%*\n\nMene Ketehe Kok Tanya saya\nMinimal Mandi🗿', '*28%*\n\nIya deh Cipaling Imut;)', '*100%*\n\nPap imutnya dulu dong:v😘']
+        const pret = nanya[Math.floor(Math.random() * nanya.length)]
+        fuzzy.sendMessage(from, {
+          contextInfo: {
+            externalAdReply: {
+              showAdAttribution: true,
+              title: `primbon`,
+              body: `${ucapanWaktu}`,
+              previewType: "PHOTO",
+              thumbnailUrl: global.imgUrl,
+              sourceUrl: `${global.linkig}`,
+            }
+          },
+          text: '*Pertanyaan : ' + edgar + '*\n\n*Jawaban :* ' + pret
+        }, {
+          quoted: m
+        })
+      }
+      break
+      case 'tebak': {
+        if (!m.isGroup) return reply('cmd only group')
 
+        function isGameActive() {
+          return tebakgambar[from] || tebakkata[from] || tebakkalimat[from] || tebaklirik[from] ||
+            tebaktebakan[from] || tebakbendera[from] || tebakbendera2[from] || tebakkabupaten[from] ||
+            tebakkimia[from] || tebakasahotak[from] || tebaksiapakahaku[from] || tebaksusunkata[from] ||
+            tebaktekateki[from] || tebakjkt48[from];
+        }
+        if (isGameActive()) {
+          return reply("Masih Ada Sesi Permainan Yang Belum Diselesaikan!");
+        }
+
+        if (args[0] === 'gambar') {
+
+          let anu = await fetchJson('https://raw.githubusercontent.com/BochilTeam/database/master/games/tebakgambar.json')
+          let result = anu[Math.floor(Math.random() * anu.length)]
+          console.log("Jawaban: " + result.jawaban)
+          fuzzy.sendMessage(m.chat, {
+            image: {
+              url: result.img
+            },
+            caption: `Silahkan Jawab Soal Di Atas Ini\n\nDeskripsi : ${result.deskripsi}\nWaktu : 60s\n\n*CARA JAWAB:* Reply pesan ini untuk menjawab`
+          }, {
+            quoted: m
+          }).then(() => {
+            tebakgambar[from] = result.jawaban.toLowerCase()
+          })
+          await sleep(60000)
+          if (tebakgambar.hasOwnProperty(from)) {
+            fuzzy.sendText(m.chat, `Waktu Habis\nJawaban:  ${tebakgambar[from]}`, m)
+            delete tebakgambar[from]
+          }
+        }
+        else if (args[0] === 'kata') {
+
+          let anu = await fetchJson('https://raw.githubusercontent.com/BochilTeam/database/master/games/tebakkata.json')
+          let result = anu[Math.floor(Math.random() * anu.length)]
+          console.log("Jawaban: " + result.jawaban)
+          fuzzy.sendText(m.chat, `Silahkan Jawab Pertanyaan Berikut\n\n${result.soal}\nWaktu : 60s\n\n*CARA JAWAB:* Reply pesan ini untuk menjawab`, m).then(() => {
+            tebakkata[from] = result.jawaban.toLowerCase()
+          })
+          await sleep(60000)
+          if (tebakkata.hasOwnProperty(from)) {
+            fuzzy.sendText(m.chat, `Waktu Habis\nJawaban:  ${tebakkata[from]}`, m)
+            delete tebakkata[from]
+          }
+        }
+        else if (args[0] === 'kalimat') {
+          let anu = await fetchJson('https://raw.githubusercontent.com/BochilTeam/database/master/games/tebakkalimat.json')
+          let result = anu[Math.floor(Math.random() * anu.length)]
+          console.log("Jawaban: " + result.jawaban)
+          fuzzy.sendText(m.chat, `Silahkan Jawab Pertanyaan Berikut\n\n${result.soal}\nWaktu : 60s\n\n*CARA JAWAB:* Reply pesan ini untuk menjawab`, m).then(() => {
+            tebakkalimat[from] = result.jawaban.toLowerCase()
+          })
+          await sleep(60000)
+          if (tebakkalimat.hasOwnProperty(from)) {
+            fuzzy.sendText(m.chat, `Waktu Habis\nJawaban:  ${tebakkalimat[from]}`, m)
+            delete tebakkalimat[from]
+          }
+        }
+        else if (args[0] === 'lirik') {
+        
+          let anu = await fetchJson('https://raw.githubusercontent.com/BochilTeam/database/master/games/tebaklirik.json')
+          let result = anu[Math.floor(Math.random() * anu.length)]
+          console.log("Jawaban: " + result.jawaban)
+          fuzzy.sendText(m.chat, `Ini Adalah Lirik Dari Lagu? : *${result.soal}*?\nWaktu : 60s\n\n*CARA JAWAB:* Reply pesan ini untuk menjawab`, m).then(() => {
+            tebaklirik[from] = result.jawaban.toLowerCase()
+          })
+          await sleep(60000)
+          if (tebaklirik.hasOwnProperty(from)) {
+            fuzzy.sendText(m.chat, `Waktu Habis\nJawaban:  ${tebaklirik[from]}`, m)
+            delete tebaklirik[from]
+          }
+        }
+        else if (args[0] === 'tebakan') {
+         let anu = await fetchJson('https://raw.githubusercontent.com/BochilTeam/database/master/games/tebaktebakan.json')
+          let result = anu[Math.floor(Math.random() * anu.length)]
+          console.log("Jawaban: " + result.jawaban)
+          fuzzy.sendText(m.chat, `Jawablah Pertanyaan Berikut : *${result.soal}*?\nWaktu : 60s\n\n*CARA JAWAB:* Reply pesan ini untuk menjawab`, m).then(() => {
+            tebaktebakan[from] = result.jawaban.toLowerCase()
+          })
+          await sleep(60000)
+          if (tebaktebakan.hasOwnProperty(from)) {
+            fuzzy.sendText(m.chat, `Waktu Habis\nJawaban:  ${tebaktebakan[from]}`, m)
+            delete tebaktebakan[from]
+          }
+        }
+        else if (args[0] === 'bendera') {
+        
+          let anu = await fetchJson('https://raw.githubusercontent.com/BochilTeam/database/master/games/tebakbendera.json')
+          let result = anu[Math.floor(Math.random() * anu.length)]
+          console.log("Jawaban: " + result.name)
+          fuzzy.sendMessage(m.chat, {
+            image: {
+              url: result.img
+            },
+            caption: `Silahkan Jawab Gambar Berikut\n\nClue : ${result.flag}\nWaktu : 60s\n\n*CARA JAWAB:* Reply pesan ini untuk menjawab`
+          }, {
+            quoted: m
+          }).then(() => {
+            tebakbendera[from] = result.name.toLowerCase()
+          })
+          await sleep(60000)
+          if (tebakbendera.hasOwnProperty(from)) {
+            fuzzy.sendText(m.chat, `Waktu Habis\nJawaban:  ${tebakbendera[from]}`, m)
+            delete tebakbendera[from]
+          }
+        }
+        else if (args[0] === 'bendera2') {
+       let anu = await fetchJson('https://raw.githubusercontent.com/BochilTeam/database/master/games/tebakbendera2.json')
+          let result = anu[Math.floor(Math.random() * anu.length)]
+          console.log("Jawaban: " + result.name)
+          fuzzy.sendMessage(m.chat, {
+            image: {
+              url: result.img
+            },
+            caption: `Silahkan Jawab Gambar Berikut\n\nWaktu : 60s\n\n*CARA JAWAB:* Reply pesan ini untuk menjawab`
+          }, {
+            quoted: m
+          }).then(() => {
+            tebakbendera2[from] = result.name.toLowerCase()
+          })
+          await sleep(60000)
+          if (tebakbendera2.hasOwnProperty(from)) {
+            fuzzy.sendText(m.chat, `Waktu Habis\nJawaban:  ${tebakbendera2[from]}`, m)
+            delete tebakbendera2[from]
+          }
+        }
+        else if (args[0] === 'kabupaten') {
+          
+          let anu = await fetchJson('https://raw.githubusercontent.com/BochilTeam/database/master/games/tebakkabupaten.json')
+          let result = anu[Math.floor(Math.random() * anu.length)]
+          console.log("Jawaban: " + result.title)
+          fuzzy.sendImage(m.chat, result.url, `Silahkan Jawab Gambar Berikut\n\nWaktu : 60s\n\n*CARA JAWAB:* Reply pesan ini untuk menjawab`, m).then(() => {
+            tebakkabupaten[from] = result.title.toLowerCase()
+          })
+          await sleep(60000)
+          if (tebakkabupaten.hasOwnProperty(from)) {
+            fuzzy.sendText(m.chat, `Waktu Habis\nJawaban:  ${tebakkabupaten[from]}`, m)
+            delete tebakkabupaten[from]
+          }
+        }
+        else if (args[0] === 'kimia') {
+          
+          let anu = await fetchJson('https://raw.githubusercontent.com/BochilTeam/database/master/games/tebakkimia.json')
+          let result = anu[Math.floor(Math.random() * anu.length)]
+          console.log("Jawaban: " + result.lambang)
+          fuzzy.sendText(m.chat, `Silahkan Jawab Pertanyaan Berikut\n\nUnsur : ${result.unsur}\nWaktu : 60s\n\n*CARA JAWAB:* Reply pesan ini untuk menjawab`, m).then(() => {
+            tebakkimia[from] = result.lambang.toLowerCase()
+          })
+          await sleep(60000)
+          if (tebakkimia.hasOwnProperty(from)) {
+            fuzzy.sendText(m.chat, `Waktu Habis\nJawaban:  ${tebakkimia[from]}`, m)
+            delete tebakkimia[from]
+          }
+        }
+        else if (args[0] === 'asahotak') {
+        
+          let anu = await fetchJson('https://raw.githubusercontent.com/BochilTeam/database/master/games/asahotak.json')
+          let result = anu[Math.floor(Math.random() * anu.length)]
+          console.log("Jawaban: " + result.jawaban)
+          fuzzy.sendText(m.chat, `Silahkan Jawab Pertanyaan Berikut\n\nSoal : ${result.soal}\nWaktu : 60s\n\n*CARA JAWAB:* Reply pesan ini untuk menjawab`, m).then(() => {
+            tebakasahotak[from] = result.jawaban.toLowerCase()
+          })
+          await sleep(60000)
+          if (tebakasahotak.hasOwnProperty(from)) {
+            fuzzy.sendText(m.chat, `Waktu Habis\nJawaban:  ${tebakasahotak[from]}`, m)
+            delete tebakasahotak[from]
+          }
+        }
+        else if (args[0] === 'siapakahaku') {
+          
+          let anu = await fetchJson('https://raw.githubusercontent.com/BochilTeam/database/master/games/siapakahaku.json')
+          let result = anu[Math.floor(Math.random() * anu.length)]
+          console.log("Jawaban: " + result.jawaban)
+          fuzzy.sendText(m.chat, `Silahkan Jawab Pertanyaan Berikut\n\nSoal : ${result.soal}\nWaktu : 60s\n\n*CARA JAWAB:* Reply pesan ini untuk menjawab`, m).then(() => {
+            tebaksiapakahaku[from] = result.jawaban.toLowerCase()
+          })
+          await sleep(60000)
+          if (tebaksiapakahaku.hasOwnProperty(from)) {
+            fuzzy.sendText(m.chat, `Waktu Habis\nJawaban:  ${tebaksiapakahaku[from]}`, m)
+            delete tebaksiapakahaku[from]
+          }
+        }
+        else if (args[0] === 'susunkata') {
+
+          
+          let anu = await fetchJson('https://raw.githubusercontent.com/BochilTeam/database/master/games/susunkata.json')
+          let result = anu[Math.floor(Math.random() * anu.length)]
+          console.log("Jawaban: " + result.jawaban)
+          fuzzy.sendText(m.chat, `Silahkan Jawab Pertanyaan Berikut\n\nSoal : ${result.soal}\nTipe : ${result.tipe}\nWaktu : 60s\n\n*CARA JAWAB:* Reply pesan ini untuk menjawab`, m).then(() => {
+            tebaksusunkata[from] = result.jawaban.toLowerCase()
+          })
+          await sleep(60000)
+          if (tebaksusunkata.hasOwnProperty(from)) {
+            fuzzy.sendText(m.chat, `Waktu Habis\nJawaban:  ${tebaksusunkata[from]}`, m)
+            delete tebaksusunkata[from]
+          }
+        }
+        else if (args[0] === 'tekateki') {
+          let anu = await fetchJson('https://raw.githubusercontent.com/BochilTeam/database/master/games/tekateki.json')
+          let result = anu[Math.floor(Math.random() * anu.length)]
+          console.log("Jawaban: " + result.jawaban)
+          fuzzy.sendText(m.chat, `Silahkan Jawab Pertanyaan Berikut\n\nSoal : ${result.soal}\nWaktu : 60s\n\n*CARA JAWAB:* Reply pesan ini untuk menjawab`, m).then(() => {
+            tebaktekateki[from] = result.jawaban.toLowerCase()
+          })
+          await sleep(60000)
+          if (tebaktekateki.hasOwnProperty(from)) {
+            fuzzy.sendText(m.chat, `Waktu Habis\nJawaban:  ${tebaktekateki[from]}`, m)
+            delete tebaktekateki[from]
+          }
+        }
+        else if (args[0] === 'jkt48') {
+          
+          let response = await fetchJson('https://api.siputzx.my.id/api/games/tebakjkt');
+          if (response.status) {
+            let result = response.data;
+            console.log("Jawaban: " + result.jawaban);
+
+            fuzzy.sendImage(from, result.gambar, `siapakah ini? sebutkan beserta nama panjang dia\nWaktu : 70s\n\n*CARA JAWAB:* Reply pesan ini untuk menjawab`, m).then(() => {
+              tebakjkt48[from] = result.jawaban.toLowerCase();
+            });
+
+            await sleep(70000); // 70 detik
+            if (tebakjkt48.hasOwnProperty(from)) {
+              fuzzy.sendText(m.chat, `Waktu Habis\nJawaban:  ${result.jawaban}`, m);
+              delete tebakjkt48[from];
+            }
+          }
+          else {
+            reply("Gagal mengambil data dari API.");
+          }
+        }
+        else reply(`- GAME TEBAK -\n\n.tebak kata\n.tebak tebakan\n.tebak bendera\n.tebak kalimat\n.tebak lirik\n.tebak tekateki\n.tebak siapakahaku\n.tebak asahotak\n.tebak susunkata\n.tebak kimia\n.tebak kabupaten\n.tebak gambar\n.tebak bendera2\n.tebak jkt48`)
+      }
+      break
 default:
   function resetSession(user) {
     if (global.db.data.users[user]?.aiSession) {
