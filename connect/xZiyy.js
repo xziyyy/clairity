@@ -725,6 +725,7 @@ Hai haii ${ucapanWaktu} 👋
 │ ⿻ ${prefix}sticker
 │ ⿻ ${prefix}stickergif
 │ ⿻ ${prefix}qc
+│ ⿻ ${prefix}emojimix
 │ ⿻ ${prefix}qcwhite
 │ ⿻ ${prefix}wasted
 ┗─────────────❐
