@@ -955,22 +955,18 @@ case 'cody': {
       }
       break
 
-      case 'hidetag': {
-        if (!isAdmins && !isCreator) return
-        let mem = m.isGroup ? await groupMetadata.participants.map(a => a.id) : ""
-        fuzzy.sendMessage(m.chat, {
-          text: `${text}`,
-          contextInfo: {
-            mentionedJid: mem,
-            groupMentions: [{
-              groupSubject: ``,
-              groupJid: m.chat,
-            }, ],
-          },
-        });
-      }
-      break
-
+      case "hidetag":
+      case "z":
+      case "h":
+        {
+          if (!m.isGroup) return reply("gc doang");
+          if (!isAdmin && !isCreator) return reply("admin doang");
+          if (!m.quoted && !text) return reply(example("teksnya/replyteks"));
+          var teks = m.quoted ? m.quoted.text : text;
+          var member = await groupMetadata.participants.map((e) => e.id);
+          fuzzy.sendMessage(m.chat, { text: teks, mentions: [...member] });
+        }
+        break;
       case 'antilinkgc': {
         if (!isAdmins) return reply('You are not an admin!');
         if (!m.isGroup) return reply('This command can only be used in groups!');
