@@ -11,18 +11,18 @@ const version = require("@whiskeysockets/baileys/package.json").version
 // jika menambahkan huruf / text di tutup kurung seperti ini []
 // contoh ['1','2','3']
 // ['1','2','3','4']
-global.botname = "Clairity Bot"
+global.botname = "NwayBot"
 global.ownerNumber = [`${global.owner}`,'no2','no3'] // no owner yang dapat mengakses all fitur
 global.email = '@gmail.com' // kosongkan jika tidak punya
 global.web = '.com' // kosongkan jika tidak punya
 global.location = 'Banten' // isi daerah mu atau tempat tinggal mu jika tidak mau kosongkan
-global.packname = 'Mayura bot' // wm yg ada di sticker
-global.author = 'dibuat oleh xZiyy' // wm yg ada di sticker
+global.packname = 'nwaybot' // wm yg ada di sticker
+global.author = 'dibuat oleh NwayStore' // wm yg ada di sticker
 global.imgUrl = "https://files.catbox.moe/8cmckf.jpg" // ubah menggunakan !setimgbot
 global.menuimgUrl = "https://files.catbox.moe/bfwpip.jpg" // ubah menggunakan !setimgmenu
 
 global.idch = "channel kalian"
-global.namech = "- Mayura bot -"
+global.namech = "- Nwaybot -"
 
 global.mess = {
     group: "Fitur Hanya Digunakan Untuk Grup!",
