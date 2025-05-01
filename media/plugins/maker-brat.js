@@ -11,11 +11,7 @@ module.exports = {
             return reply('Jangan ada spasi antara titik dan brat!!');
         }
 
-<<<<<<< HEAD
-        const clairityApi = `https://aqul-brat.hf.space/?text=${encodeURIComponent(q.trim())}`;
-=======
         const clairityApi = `https://brat.caliphdev.com/api/brat?text=${encodeURIComponent(q.trim())}`;
->>>>>>> f110bc2 (update)
         const siputApi = `https://clairity-nine.vercel.app/api/brat?text=${encodeURIComponent(q.trim())}`;
 
        reply('_Tunggu sebentar, sedang memproses..._')
@@ -24,13 +20,8 @@ module.exports = {
             // Coba akses API Clairity
             const response = await axios.get(clairityApi, { responseType: 'arraybuffer' });
             await fuzzy.sendImageAsSticker(m.chat, response.data, m, {
-<<<<<<< HEAD
-                packname: "Digital Mayura",
-                author: "website: https://mayura.us.kg"
-=======
                 packname: global.packname,
                 author: global.author
->>>>>>> f110bc2 (update)
             });
         } catch (error) {
             console.error('API Clairity error, mencoba API Siput:', error.message);
