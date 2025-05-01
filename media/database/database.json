@@ -549,8 +549,6 @@
       "afkTime": -1,
       "afkReason": "",
       "isBanned": false
-<<<<<<< HEAD
-=======
     },
     "6281298626421@s.whatsapp.net": {
       "afkTime": -1,
@@ -596,7 +594,6 @@
       "afkTime": -1,
       "afkReason": "",
       "isBanned": false
->>>>>>> f110bc2 (update)
     }
   },
   "chats": {
@@ -644,8 +641,6 @@
       "autoai": false,
       "isBannedChat": false,
       "welcome": false
-<<<<<<< HEAD
-=======
     },
     "6281298626421@s.whatsapp.net": {
       "autoai": false,
@@ -656,7 +651,6 @@
       "autoai": false,
       "isBannedChat": false,
       "welcome": false
->>>>>>> f110bc2 (update)
     }
   },
   "database": {},
@@ -668,14 +662,11 @@
       "autoread": false,
       "public": false,
       "onlygrub": false
-<<<<<<< HEAD
-=======
     },
     "6281298626421@s.whatsapp.net": {
       "autoread": false,
       "public": false,
       "onlygrub": false
->>>>>>> f110bc2 (update)
     }
   },
   "others": {},
