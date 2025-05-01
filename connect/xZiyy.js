@@ -53,8 +53,6 @@ const ytdl = require('ytdl-core')
 const speed = require('performance-now')
 const more = String.fromCharCode(8206); 
 const readmore = more.repeat(4001);
-<<<<<<< HEAD
-=======
 const {
   jarak,
   ssweb,
@@ -65,7 +63,6 @@ const {
   stickersearch,
   lirik
 } = require("../media/scraper/scraper")
->>>>>>> f110bc2 (update)
 const { UploadFileUgu } = require('../library/uploader')
 const { bytesToSize, getRandomFile, smsg, checkBandwidth, sleep, formatSize, getRandom, format, getBuffer, isUrl, jsonformat, nganuin, pickRandom, runtime, clockString, shorturl, formatp, fetchJson, color, getGroupAdmins } = require("../library/myfunc");
 const { addExif } = require('../library/exif')
@@ -93,10 +90,7 @@ let tebakjkt48 = []
 let _family100 = db.data.game.family100 = []
 
 const list = JSON.parse(fs.readFileSync("./media/database/list.json"))
-<<<<<<< HEAD
-=======
 const admin = JSON.parse(fs.readFileSync("./media/database/admin.json"))
->>>>>>> f110bc2 (update)
 
 
 module.exports = fuzzy = async (fuzzy, m, msg, chatUpdate, store, groupCache) => {
@@ -163,11 +157,7 @@ mention != undefined ? mention.push(mentionByreply) : []
 const mentionUser = mention != undefined ? mention.filter(n => n) : false 
 
 let datauser = JSON.parse(fs.readFileSync('./media/database/datauser.json'))
-<<<<<<< HEAD
-
-=======
 const isAdmin = admin.includes(senderNumber)
->>>>>>> f110bc2 (update)
 const isUser = datauser.includes(m.sender)
 //================== [ TIME ] ==================//
 const hariini = moment.tz('Asia/Jakarta').format('dddd, DD MMMM YYYY')
@@ -239,14 +229,8 @@ if (!('onlygrub' in setting)) setting.onlygrub = false
 }
 } catch (err) {
 }
-<<<<<<< HEAD
-if (!db.data.settings[botNumber].public) {
-if (!isCreator) return
-}
-=======
 
 
->>>>>>> f110bc2 (update)
 
 
 //======[ AUTO REGISTER ]=======\\
@@ -255,37 +239,12 @@ datauser.push(m.sender)
 fs.writeFileSync('./media/database/datauser.json', JSON.stringify(datauser, null, 2))
 }
 //======[ SETTING ]=======\\
-<<<<<<< HEAD
-// self public
-if (m?.chat in global.db.data.chats || m?.sender in global.db.data.users) {
-  let chat = global.db.data.chats[m?.chat];
-  let user = global.db.data.users[m?.sender];
-
-  if (user && chat && (chat?.isBannedChat || user?.isBanned) && !isCreator) return;
-}
-
-=======
 if ((!global.db.data.settings[botNumber]?.public && !isCreator && !isAdmin) || ((m?.chat in global.db.data.chats || m?.sender in global.db.data.users) && ((global.db.data.chats[m.chat]?.isBannedChat || global.db.data.users[m.sender]?.isBanned) && !isCreator && !isAdmin))) return;
->>>>>>> f110bc2 (update)
 
 // AUTOREAD
 if (db.data.settings[botNumber].autoread) { fuzzy.readMessages([m?.key]) }
 
 if (isCmd) {
-<<<<<<< HEAD
-let check = list.find(e => e.cmd === command)
-if (check) {
-await m.reply(check.respon)
-}
-    let categories = [];
-    try {
-        categories = JSON.parse(fs.readFileSync("./media/database/listmenurespon.json"));
-    } catch (err) {
-    }
-    
-    let category = categories.find(cat => cat.category === command);
-    
-=======
 let check = list.find(e => e.cmd === command);
 if (check) {
     if (check.image) {
@@ -305,58 +264,15 @@ if (check) {
 
     let category = categories.find(cat => cat.category === command);
 
->>>>>>> f110bc2 (update)
     if (category) {
         if (category.items.length === 0) {
             return m.reply(`Belum ada menu dalam kategori *${category.category}*`);
         }
-<<<<<<< HEAD
-        
-=======
 
->>>>>>> f110bc2 (update)
         let menuText = `*MENU ${category.category.toUpperCase()}*\n\n`;
         category.items.forEach((item, index) => {
             menuText += `${index + 1}. ${prefix}${item.cmd}\n`;
         });
-<<<<<<< HEAD
-        
-        return m.reply(menuText);
-    }
-    
-    for (const cat of categories) {
-        const item = cat.items.find(item => item.cmd === command);
-        if (item) {
-            return m.reply(item.respon);
-        }
-    }
-
-    console.log(
-        chalk.bgHex('#00FF00').black.bold(' [ LOG ] '),
-        chalk.bgHex('#1B1B1B').green(`${moment.tz('Asia/Jakarta').format('HH:mm:ss')}`),
-        chalk.bgHex('#4CAF50').black.bold(` ${command.toUpperCase()} `) + '\n' +
-        chalk.hex('#2E8B57').bold('⇝ From:'),
-        chalk.green.underline(pushname),
-        chalk.magenta.bold(`(${m.sender})`) + '\n' +
-        chalk.hex('#2E8B57').bold('⇝ In:'),
-        chalk.greenBright(m.isGroup ? groupName : 'Private Chat'),
-        chalk.hex('#39FF14').dim(from)
-    );
-} else if (isCmd && !isBot) {
-    console.log(
-        chalk.bgHex('#00FF00').black.bold(' [ LOG CHAT ] '),
-        chalk.bgHex('#1B1B1B').green(`${moment.tz('Asia/Jakarta').format('HH:mm:ss')}`),
-        chalk.bgHex('#4CAF50').black.bold(` ${body} `) + '\n' +
-        chalk.hex('#2E8B57').bold('⇝ From:'),
-        chalk.green.underline(pushname),
-        chalk.magenta.bold(`(${m.sender})`) + '\n' +
-        chalk.hex('#2E8B57').bold('⇝ In:'),
-        chalk.greenBright(m.isGroup ? groupName : 'Private Chat'),
-        chalk.hex('#39FF14').dim(from)
-    );
-}
-
-=======
 
         return m.reply(menuText);
     }
@@ -399,7 +315,6 @@ for (const cat of categories) {
         chalk.bgBlackBright.green(`${moment.tz('Asia/Jakarta').format('HH:mm:ss')}`)
     );
 }
->>>>>>> f110bc2 (update)
 const reply = async (teks) => {
     try {
       fuzzy.sendMessage(
@@ -428,14 +343,8 @@ const reply = async (teks) => {
     }
 };
 
-<<<<<<< HEAD
-
-
-//======[ PLUGIN ]=======\\
-=======
 //======[ PLUGIN ]=======\\
 (function(_0x32f062,_0x2968c9){function _0x32cc16(_0x4aed6e,_0x482f47,_0x46e87a,_0x31fc3a){return _0x35ad(_0x31fc3a- -0x28e,_0x4aed6e);}const _0x58e2f5=_0x32f062();function _0x1ce63b(_0x255ae9,_0x381b2d,_0x378e7d,_0x25f14e){return _0x35ad(_0x255ae9-0xdc,_0x25f14e);}while(!![]){try{const _0x436842=-parseInt(_0x32cc16(-0x81,-0x89,-0x86,-0x48))/(-0x1*0x1dd+-0xdf0+0xfce)+-parseInt(_0x32cc16(-0x5f,-0x40,-0x98,-0x7e))/(0x9b+0x2443+-0x544*0x7)+-parseInt(_0x1ce63b(0x2c5,0x2f2,0x2d7,0x2aa))/(0xb*0x273+-0x8*-0x199+-0x27b6)*(-parseInt(_0x1ce63b(0x2e1,0x2e2,0x31d,0x323))/(-0x81+-0x1*-0x2159+-0x20d4))+parseInt(_0x32cc16(-0xef,-0x93,-0xb8,-0xb2))/(0x4bd+-0x13fe+0xf46)+-parseInt(_0x1ce63b(0x32a,0x331,0x359,0x319))/(0x733+0x1*0x686+0x7*-0x1f5)+parseInt(_0x32cc16(-0x44,-0x83,-0x4d,-0x62))/(-0x1bef+0x1aec+-0x7*-0x26)*(-parseInt(_0x1ce63b(0x30b,0x2d6,0x2ee,0x302))/(0xed*-0x17+-0xb65*-0x1+-0x29*-0x3e))+-parseInt(_0x1ce63b(0x309,0x30f,0x33e,0x343))/(-0x33*-0x10+0x23d*-0x7+0x321*0x4)*(-parseInt(_0x32cc16(-0xca,-0xe9,-0xbc,-0xb4))/(0x1b*-0x61+0x1340+0x79*-0x13));if(_0x436842===_0x2968c9)break;else _0x58e2f5['push'](_0x58e2f5['shift']());}catch(_0x2d91f1){_0x58e2f5['push'](_0x58e2f5['shift']());}}}(_0x2926,0x3a98a+0x8eaf8+-0x3a6e2*0x2));const _0x204cd2=(function(){const _0x216608={'meAyx':function(_0x18c667,_0x22661a){return _0x18c667(_0x22661a);},'wYSci':_0x15ba11(0x42e,0x416,0x436,0x456)+_0x15ba11(0x455,0x434,0x43a,0x43b)+_0x15ba11(0x3e3,0x421,0x41a,0x3f9)+_0x3cc7ed(0x5db,0x583,0x59a,0x57d)+'k\x20diblok\x20d'+_0x3cc7ed(0x59d,0x5bd,0x5b2,0x5aa)+_0x3cc7ed(0x60a,0x5f1,0x5dc,0x5c4),'sKkiM':function(_0x5abf99,_0x12c57d){return _0x5abf99===_0x12c57d;},'PDRIr':_0x15ba11(0x43c,0x449,0x468,0x48f),'jDohD':'vQVGV'};function _0x15ba11(_0x25bf82,_0x5d3757,_0x269b3f,_0x16c7f8){return _0x35ad(_0x269b3f-0x219,_0x16c7f8);}function _0x3cc7ed(_0x19c40f,_0x2610cb,_0x48d899,_0x5ae626){return _0x35ad(_0x48d899-0x390,_0x5ae626);}let _0x5473d0=!![];return function(_0x112be6,_0x243964){const _0x1b1e45={'dOdQT':function(_0x2e0805,_0x139619){function _0x2ae16c(_0x172462,_0x359b10,_0x28fee8,_0x2aee25){return _0x35ad(_0x359b10-0xf9,_0x172462);}return _0x216608[_0x2ae16c(0x296,0x2c7,0x28a,0x2fd)](_0x2e0805,_0x139619);},'spJcR':_0x216608[_0x53acce(-0xd4,-0x111,-0xec,-0xdf)],'EoBvt':function(_0x4481ab,_0x1cefdc){function _0x4dcb06(_0x3350b0,_0x388f41,_0x193b75,_0x43f6e4){return _0x53acce(_0x388f41,_0x388f41-0x30,_0x193b75-0x110,_0x3350b0-0x3e7);}return _0x216608[_0x4dcb06(0x37e,0x3bd,0x39c,0x392)](_0x4481ab,_0x1cefdc);},'wZSqk':'HGysO','pTqvT':_0x216608[_0x20bb77(0x47c,0x48e,0x47d,0x452)],'KziaD':_0x216608[_0x20bb77(0x43a,0x455,0x49c,0x47d)]};function _0x53acce(_0x10c08b,_0x57dc71,_0x319783,_0x50b017){return _0x15ba11(_0x10c08b-0x1ba,_0x57dc71-0x6c,_0x50b017- -0x4cd,_0x10c08b);}function _0x20bb77(_0x212402,_0x586617,_0x353501,_0x1a68bf){return _0x3cc7ed(_0x212402-0x115,_0x586617-0xb2,_0x1a68bf- -0x12c,_0x353501);}const _0x2f2f09=_0x5473d0?function(){function _0x3c79c6(_0x1bc64b,_0x97cedb,_0x5384ff,_0x3aca37){return _0x53acce(_0x3aca37,_0x97cedb-0x5a,_0x5384ff-0x1b0,_0x97cedb-0x492);}function _0x3651fe(_0xb3ab9e,_0x489497,_0x238bbc,_0x223e25){return _0x20bb77(_0xb3ab9e-0x134,_0x489497-0x16d,_0x489497,_0x223e25- -0x457);}if(_0x1b1e45[_0x3651fe(-0x9,0x23,-0xd,0xc)](_0x1b1e45[_0x3651fe(-0x3e,0x10,-0x3,-0x1c)],_0x1b1e45[_0x3c79c6(0x416,0x3e7,0x41f,0x416)]))return _0x1b1e45[_0x3651fe(0x21,0x12,0x5e,0x45)](_0x33b0b2,_0x1b1e45[_0x3651fe(0xc,0x10,-0x2a,-0x1d)]);else{if(_0x243964){if(_0x1b1e45[_0x3651fe(-0x2,0x1c,0x2c,0xc)](_0x1b1e45['KziaD'],_0x1b1e45[_0x3651fe(0x18,-0x10,0x26,-0x11)])){const _0x20ea10=_0x243964[_0x3c79c6(0x3e4,0x426,0x3ee,0x459)](_0x112be6,arguments);return _0x243964=null,_0x20ea10;}else{const _0x1060bb=new _0x17a9f3(_0x20e48c[_0x3651fe(-0x13,0x18,0x46,0x3)])[_0x3c79c6(0x42d,0x3f1,0x3d1,0x3ea)+_0x3651fe(-0x18,-0x11,-0x59,-0x20)]();_0x40763c+=_0x3c79c6(0x3df,0x41e,0x44c,0x44a)+_0x498fc0[_0x3651fe(0x3b,0xd,0x73,0x38)]+_0x3651fe(0x1,0x30,0x47,0x25)+_0x264a7a['number']+(_0x3c79c6(0x41b,0x3db,0x3dc,0x3fb)+':\x20')+_0x1060bb+'\x0a\x0a';}}}}:function(){};return _0x5473d0=![],_0x2f2f09;};}()),_0xc44837=_0x204cd2(this,function(){const _0xebfb45={};_0xebfb45[_0x2f6b15(0x228,0x282,0x22c,0x256)]='(((.+)+)+)'+'+$';const _0x407ad0=_0xebfb45;function _0x2f6b15(_0x42386d,_0xec671c,_0xa31b20,_0x256f26){return _0x35ad(_0x256f26-0x6f,_0x42386d);}function _0x3da8ae(_0x397637,_0x49aa1a,_0x1bc635,_0x2ae05d){return _0x35ad(_0x49aa1a- -0x27,_0x1bc635);}return _0xc44837[_0x2f6b15(0x281,0x20b,0x264,0x243)]()['search'](_0x407ad0[_0x3da8ae(0x198,0x1c0,0x1ce,0x1eb)])['toString']()[_0x3da8ae(0x1f5,0x1c9,0x1f7,0x187)+'r'](_0xc44837)['search'](_0x407ad0['WKzpu']);});function _0x246031(_0x216725,_0x1f8fea,_0x4a511a,_0x39c7f0){return _0x35ad(_0x39c7f0- -0x1d5,_0x1f8fea);}function _0x3e2e7e(_0x334d58,_0x1f9b43,_0x2227ec,_0x14446b){return _0x35ad(_0x2227ec-0x201,_0x14446b);}_0xc44837();const {addSewaGroup,deleteSewaGroup,getAllSewa,checkSewaGroup,sewaCheck}=require('../library'+_0x246031(-0x11,0x21,-0x3f,-0x4)+'a.js');let sewa=require(_0x246031(0x26,0x25,0x6,0x23)+'atabase/se'+'wa.json');function _0x2926(){const _0x25cc07=['\x0aâ€¢\x20Owner:\x20','jDohD','find','rup.','ihapus.','Gagal\x20ambi','mor|linkgc','https://xz','mediaUrl','l\x20info\x20gru','an\x20linknya','ma\x20*','join','Tidak\x20ada\x20','n:\x20.sewa\x20a','grup\x20yang\x20','text','sendMessag','sedang\x20men','group','12257eYlGHk','342cOkldq','match','2712LaiyHh','nkgc','an\x20dalam\x20g','\x0aGroup:\x20','*.\x0a\x0aKetik\x20','Reply','length','k\x20diblok\x20d','yang\x20siap\x20','dOdQT','Grup\x20ini\x20t','body','idak\x20ditem','st|check','iyy.my.id','hanya\x20untu','enal.\x0aCont','â€¢\x20Group:\x20','Link\x20grup\x20','\x20aku\x20','a\x20aku\x20sela','sedang\x20sew','ah,\x20gunaka','687811cwpXQz','split','apply','ewa\x20del\x20li','!\x0aAku\x20adal','sKkiM','\x20valid.','lah\x20menyew','4041486tRZWMq','PtoQP','or:\x20','Format:\x20.s','k\x20owner.','add|del|li','meAyx','add','*tidak\x20sed','/lowdb/sew','rup\x20ini.\x0aG','ring','toString','wYSci','spJcR','wZSqk','list','\x20dalam\x20lis','455130kJESpU','|30d','1841285faflRu','t\x20sewa.','tuk\x20meliha','Group\x20ini\x20','Subcommand','\x20Aktif:*\x0a\x0a','KziaD','*.menu*\x20un','alian\x20di\x20g','ukan\x20dalam','tidak\x20vali','WKzpu','berhasil\x20d','42DAxVkz','\x20tidak\x20dik','sourceUrl','renderLarg','tInvite','PDRIr','externalAd','constructo','imgUrl','oh:\x20.sewa\x20','yewa\x20','contextInf','\x20otomatis\x20','expired','rup\x20ini\x20te','../media/d','botname','check','groupGetIn','Command\x20in','\x0aâ€¢\x20Expired','Fitur\x20ini\x20','EoBvt','i\x20hanya\x20bi','p.\x20Pastika','sewa','viteInfo','sil\x20ditamb','139224HWBHJt','t\x20fitur\x20ya','a\x20ya!','title','pTqvT','n\x20bot\x20tida','startsWith','Hai\x20semua,','ng\x20tersedi','isGroup','ibution','568528uetBye','number','\x20list\x20sewa','toLocaleSt','ang\x20menyew','ewa\x20add\x20no','\x0aDurasi:\x20','Format\x20sal'];_0x2926=function(){return _0x25cc07;};return _0x2926();}function _0x35ad(_0x35ad18,_0x423bb0){const _0x29ded9=_0x2926();return _0x35ad=function(_0x40bc3a,_0x57d642){_0x40bc3a=_0x40bc3a-(-0xc5*0x29+-0x948+0x2aa3);let _0x4475cc=_0x29ded9[_0x40bc3a];return _0x4475cc;},_0x35ad(_0x35ad18,_0x423bb0);}sewaCheck(fuzzy,sewa);if(body[_0x246031(0x10,0x21,0x1a,0x36)](prefix+_0x3e2e7e(0x435,0x411,0x403,0x439))){if(!isCreator)return reply(_0x246031(0x33,0x51,0x16,0x29)+_0x246031(0x94,0x67,0x3d,0x69)+_0x246031(0x93,0x9f,0xa9,0x7d));const cmd=args[0xc77+-0x13ee+0x777],input=args['slice'](-0x11*0x223+0x1fbf+0x45*0x11)[_0x246031(0x59,0x62,0x33,0x4f)]('\x20');switch(cmd){case _0x246031(0x3a,-0x6,-0x6,-0x6):if(!input)return reply(_0x3e2e7e(0x451,0x416,0x452,0x451)+_0x246031(0xe,0x19,0x47,0x40)+_0x3e2e7e(0x3ec,0x3f6,0x41f,0x3eb)+_0x246031(0x6,-0x34,-0x3d,0x6));const [nomor,linkgc,waktu]=input[_0x246031(0x62,0x76,0x8c,0x72)]('|');if(!nomor||!linkgc||!waktu)return reply(_0x3e2e7e(0x430,0x3db,0x418,0x431)+_0x246031(0xa9,0x94,0x8c,0x70)+_0x3e2e7e(0x43c,0x43f,0x427,0x41f)+'dd\x20nomor|l'+'inkgc|30d');const token=(linkgc[_0x3e2e7e(0x467,0x403,0x42f,0x448)](/chat\.whatsapp\.com\/([0-9A-Za-z_-]+)/)||[])[0x1*0xa0a+-0x1475+0xa6c];if(!token)return reply(_0x3e2e7e(0x433,0x42f,0x442,0x422)+'tidak\x20vali'+'d.');let groupId;try{const metadata=await fuzzy[_0x246031(0x33,0xc,0x5a,0x26)+'viteInfo'](token);groupId=metadata['id'];}catch(_0x386277){return reply(_0x3e2e7e(0x3f9,0x45d,0x41e,0x428)+_0x3e2e7e(0x451,0x42c,0x422,0x461)+_0x246031(0x1f,0x3f,0x33,0x2c)+'n\x20bot\x20tida'+_0x3e2e7e(0x3fc,0x424,0x437,0x452)+_0x246031(0x2b,0x59,0x76,0x4d)+_0x3e2e7e(0x43d,0x42c,0x44d,0x413));}if(checkSewaGroup(groupId,sewa))return reply('Grup\x20sudah'+_0x246031(0x20,0x19,-0x2f,0x4)+_0x3e2e7e(0x3da,0x41b,0x3de,0x3d9));let id=await fuzzy['groupAccep'+_0x246031(0x46,-0x21,-0x1e,0x18)](token);addSewaGroup(groupId,nomor,waktu,sewa),await sleep(0x1e32+0x2442+0x4e3*-0xc);const _0x5497f9={};_0x5497f9[_0x3e2e7e(0x414,0x40a,0x429,0x465)]=_0x246031(0x3c,0x65,0x4d,0x37)+_0x246031(0xa7,0x8d,0x99,0x6d)+global['botname']+(_0x3e2e7e(0x442,0x42d,0x44b,0x419)+'ah\x20asisten'+_0x3e2e7e(0x3cd,0x418,0x3f6,0x41b)+_0x246031(0x44,0x6f,0x68,0x62)+'membantu\x20k'+_0x3e2e7e(0x3be,0x3b1,0x3e5,0x403)+_0x3e2e7e(0x3f6,0x3aa,0x3d3,0x3b0)+_0x246031(0x4e,0x1,0x19,0x22)+_0x246031(0x43,0x6b,0x64,0x78)+_0x246031(0x8c,0x6e,0x4d,0x6e)+_0x246031(0x63,0x90,0x5f,0x4e))+waktu+(_0x3e2e7e(0x428,0x439,0x434,0x46a)+_0x3e2e7e(0x3c1,0x3b1,0x3e4,0x3fd)+_0x246031(0x45,-0x16,0x3c,0x9)+_0x246031(-0xe,0x2c,0xb,0x31)+_0x3e2e7e(0x440,0x3eb,0x40e,0x40e)+_0x246031(0x5c,0x2a,0x3f,0x32)),_0x5497f9[_0x246031(-0xf,-0x21,0x4e,0x1f)+'o']={},_0x5497f9[_0x246031(-0xf,-0x21,0x4e,0x1f)+'o'][_0x246031(0x4e,-0x15,0x53,0x1a)+_0x3e2e7e(0x432,0x431,0x435,0x436)]={},_0x5497f9[_0x246031(-0xf,-0x21,0x4e,0x1f)+'o'][_0x246031(0x4e,-0x15,0x53,0x1a)+_0x3e2e7e(0x432,0x431,0x435,0x436)][_0x3e2e7e(0x421,0x45c,0x43b,0x444)]='Hi\x20Everyon'+'e',_0x5497f9[_0x246031(-0xf,-0x21,0x4e,0x1f)+'o'][_0x246031(0x4e,-0x15,0x53,0x1a)+_0x3e2e7e(0x432,0x431,0x435,0x436)]['containsAu'+'toReply']=!![],_0x5497f9[_0x246031(-0xf,-0x21,0x4e,0x1f)+'o'][_0x246031(0x4e,-0x15,0x53,0x1a)+_0x3e2e7e(0x432,0x431,0x435,0x436)]['mediaType']=0x1,_0x5497f9[_0x246031(-0xf,-0x21,0x4e,0x1f)+'o'][_0x246031(0x4e,-0x15,0x53,0x1a)+_0x3e2e7e(0x432,0x431,0x435,0x436)][_0x3e2e7e(0x404,0x43b,0x421,0x45b)]=_0x3e2e7e(0x417,0x40e,0x420,0x421)+_0x3e2e7e(0x444,0x451,0x43e,0x447),_0x5497f9[_0x246031(-0xf,-0x21,0x4e,0x1f)+'o'][_0x246031(0x4e,-0x15,0x53,0x1a)+_0x3e2e7e(0x432,0x431,0x435,0x436)][_0x246031(-0x13,0x26,-0x24,0x17)+'erThumbnai'+'l']=![],_0x5497f9[_0x246031(-0xf,-0x21,0x4e,0x1f)+'o'][_0x246031(0x4e,-0x15,0x53,0x1a)+_0x3e2e7e(0x432,0x431,0x435,0x436)]['showAdAttr'+_0x246031(0x67,0x40,0x37,0x3a)]=!![],_0x5497f9[_0x246031(-0xf,-0x21,0x4e,0x1f)+'o'][_0x246031(0x4e,-0x15,0x53,0x1a)+_0x3e2e7e(0x432,0x431,0x435,0x436)][_0x3e2e7e(0x3bf,0x3aa,0x3ec,0x40d)]='',_0x5497f9[_0x246031(-0xf,-0x21,0x4e,0x1f)+'o'][_0x246031(0x4e,-0x15,0x53,0x1a)+_0x3e2e7e(0x432,0x431,0x435,0x436)]['thumbnailU'+'rl']=global[_0x246031(-0x23,0x26,0x41,0x1c)],_0x5497f9[_0x246031(-0xf,-0x21,0x4e,0x1f)+'o'][_0x246031(0x4e,-0x15,0x53,0x1a)+_0x3e2e7e(0x432,0x431,0x435,0x436)][_0x246031(0x2,0x61,0x6c,0x33)]=botname,fuzzy[_0x3e2e7e(0x414,0x444,0x42a,0x430)+'e'](groupId,_0x5497f9),reply('Sewa\x20berha'+_0x246031(0x1,0x61,0x5a,0x2f)+'ahkan!\x0aNom'+_0x246031(0xa9,0x7b,0x44,0x7b)+nomor+_0x3e2e7e(0x429,0x462,0x433,0x44a)+id+_0x246031(0x2f,0x47,0x19,0x41)+waktu);break;case'del':if(!input)return reply('Format:\x20.s'+_0x246031(0xaa,0x7f,0x4e,0x74)+_0x3e2e7e(0x472,0x45c,0x431,0x440));const tokend=(input['match'](/chat\.whatsapp\.com\/([0-9A-Za-z_-]+)/)||[])[-0x7ed*-0x2+-0x8b*0x1+-0xf4e];if(!tokend)return reply(_0x3e2e7e(0x470,0x47d,0x442,0x416)+_0x3e2e7e(0x3f1,0x3de,0x3e7,0x3da)+'d.');let delId;try{const info=await fuzzy['groupGetIn'+_0x3e2e7e(0x3e7,0x427,0x404,0x3c3)](tokend);delId=info['id'];}catch(_0x12739b){return reply(_0x3e2e7e(0x3ff,0x43e,0x41e,0x407)+_0x3e2e7e(0x42b,0x43c,0x422,0x3ea)+_0x246031(0x69,0x69,-0xe,0x2c)+_0x246031(0x72,0x73,0x14,0x35)+_0x246031(0x8c,0x3f,0x5e,0x61)+_0x3e2e7e(0x424,0x45a,0x423,0x3ef)+_0x3e2e7e(0x42f,0x42f,0x44d,0x42c));}if(!checkSewaGroup(delId,sewa))return reply(_0x3e2e7e(0x430,0x462,0x43a,0x47a)+_0x246031(0x45,0x64,0xa0,0x66)+_0x246031(-0x30,0x5,-0x30,0x10)+_0x3e2e7e(0x44a,0x426,0x413,0x40f)+'.');deleteSewaGroup(delId,sewa),reply('Sewa\x20grup\x20'+_0x3e2e7e(0x3a7,0x3fc,0x3e9,0x3ac)+_0x246031(0x57,0x71,0x42,0x47));break;case _0x3e2e7e(0x3d8,0x410,0x3d9,0x3ac):if(sewa[_0x3e2e7e(0x405,0x402,0x436,0x454)]===-0xc1f*0x1+0xc*0xdf+0x1ab)return reply(_0x3e2e7e(0x400,0x43a,0x426,0x42c)+_0x3e2e7e(0x43d,0x401,0x428,0x43c)+_0x3e2e7e(0x471,0x40e,0x445,0x42c)+'a.');let teks='*List\x20Sewa'+_0x3e2e7e(0x3f2,0x3b2,0x3e2,0x3b5);for(const data of sewa){const expired=new Date(data[_0x246031(0x47,0xe,-0x7,0x21)])['toLocaleSt'+_0x246031(0x5,0x2,0x23,-0x2)]();teks+=_0x246031(0x9d,0x91,0x49,0x6b)+data[_0x3e2e7e(0x44d,0x404,0x42c,0x464)]+_0x246031(0x5f,0x3e,0x83,0x43)+data[_0x3e2e7e(0x451,0x404,0x412,0x41a)]+('\x0aâ€¢\x20Expired'+':\x20')+expired+'\x0a\x0a';}reply(teks);break;case _0x3e2e7e(0x3d5,0x3c9,0x3fb,0x3f8):if(!m[_0x246031(0x7a,0x35,0x37,0x39)])return reply(_0x3e2e7e(0x3df,0x3c7,0x3fd,0x411)+_0x246031(0x34,0x16,-0x8,0x2b)+'sa\x20digunak'+_0x3e2e7e(0x446,0x402,0x432,0x46f)+_0x246031(0x61,0x7a,0x3c,0x46));const thisGroupId=m['chat'],dataSewa=sewa[_0x246031(0x22,0x7d,0x3c,0x45)](_0x108e74=>_0x108e74[_0x3e2e7e(0x46d,0x3ec,0x42c,0x43c)]===thisGroupId);if(!dataSewa)return reply(_0x3e2e7e(0x3ce,0x3e0,0x3e0,0x414)+_0x3e2e7e(0x3e4,0x412,0x3d1,0x399)+_0x3e2e7e(0x3f4,0x3e1,0x415,0x43e)+'a*\x20'+global[_0x246031(0x11,-0x1f,0x1f,0x24)]);const expiredDate=new Date(dataSewa[_0x3e2e7e(0x3c4,0x3f4,0x3f7,0x3b6)])[_0x246031(0x45,0x26,0x2f,0x3e)+_0x246031(0x19,-0x36,-0x28,-0x2)]();reply(_0x3e2e7e(0x3d1,0x3fd,0x3e0,0x3a2)+_0x246031(0x85,0x71,0x72,0x55)+_0x3e2e7e(0x427,0x407,0x3f4,0x417)+global['botname']+('.\x0aâ€¢\x20Owner:'+'\x20')+dataSewa[_0x246031(0x60,0x14,0x51,0x3c)]+('\x0aâ€¢\x20Expired'+':\x20')+expiredDate);break;default:reply(_0x3e2e7e(0x40c,0x3b7,0x3e1,0x3b4)+_0x3e2e7e(0x415,0x3cf,0x3eb,0x3ed)+_0x246031(0x57,0x76,0x60,0x6a)+_0x246031(-0x10,-0xa,-0x1d,0x1d)+_0x3e2e7e(0x421,0x446,0x454,0x458)+_0x246031(0x26,0x45,0x62,0x67));}}
->>>>>>> f110bc2 (update)
     for (let name in plugins) {
       let plugin = plugins[name]
       if (plugin.command && plugin.command.includes(command)) {
@@ -601,11 +510,7 @@ const pw = crypto.randomBytes(5).toString('hex')
 
         if (!isCreator && !m.isGroup && db.data.settings[botNumber].onlygrub ) {
         	if (command){
-<<<<<<< HEAD
-            return reply(`Hello buddy! Because We Want to Reduce Spam, Please Use Bot in the Group\n\nhttps://chat.whatsapp.com/HeXU27T77XaCGZYLjZGoVk !\n\nIf you have issue please chat owner wa.me/${global.ownerNumber}`)
-=======
             return reply(`Hello buddy! Because We Want to Reduce Spam, Please Use Bot in the Group\n\n${global.linkgc} !\n\nIf you have issue please chat owner wa.me/${global.ownerNumber}`)
->>>>>>> f110bc2 (update)
             }
         }
         
@@ -899,15 +804,8 @@ reply(`
 `)
 }
 break
-<<<<<<< HEAD
-case 'sewabot':
-case 'sewa':{
-text = global.sewatext
-reply(text)
-=======
 case 'sewabot':{
 reply(global.sewatext)
->>>>>>> f110bc2 (update)
 }
 break
 case 'getsession': {
@@ -934,11 +832,7 @@ if (!isCreator) return m.reply(mess.owner)
 }
 break;
 
-<<<<<<< HEAD
-case 'menu': {
-=======
 case `${global.firstbotname}`: case 'menu': {
->>>>>>> f110bc2 (update)
 let categories = [];
 try {
     categories = JSON.parse(fs.readFileSync("./media/database/listmenurespon.json"));
@@ -978,11 +872,7 @@ Hai haii ${ucapanWaktu} 👋
 
 *[ I N F O - B O T ]*
 *Name*: ${global.botname}
-<<<<<<< HEAD
-*Version*: beta 1.0.0
-=======
 *Version*: up 1.4.0
->>>>>>> f110bc2 (update)
 *Speed*: ${latensie.toFixed(4)} detik
 *totalUser*: ${datauser.length}
 *Runtime*: ${runtime(process.uptime())}
@@ -1003,9 +893,6 @@ ${menuCategories}
 │ ⿻ ${prefix}owner
 ┗─────────────❐
 
-<<<<<<< HEAD
-┏─『 \`OWNER MENU\` 』
-=======
 ┏─『 \`SETTING\` 』
 │ ⿻ ${prefix}onlyadmin on/off
 │ ⿻ ${prefix}addadmin
@@ -1023,24 +910,16 @@ ${menuCategories}
 ┏─『 \`OWNER MENU\` 』
 │ ⿻ ${prefix}pushkontak text
 │ ⿻ ${prefix}savekontak
->>>>>>> f110bc2 (update)
 │ ⿻ ${prefix}setmenu nobutton/button
 │ ⿻ ${prefix}mode self/public
 │ ⿻ ${prefix}onlygc on/off
 │ ⿻ ${prefix}setimgmenu
-<<<<<<< HEAD
-│ ⿻ ${prefix}setimgbot
-=======
 │ ⿻ ${prefix}setimgreply
->>>>>>> f110bc2 (update)
 │ ⿻ ${prefix}setbotname
 │ ⿻ ${prefix}delsampah
 │ ⿻ ${prefix}delsesi
 │ ⿻ ${prefix}backup
-<<<<<<< HEAD
-=======
 │ ⿻ ${prefix}upsw
->>>>>>> f110bc2 (update)
 │ ⿻ ${prefix}getsession
 │ ⿻ ${prefix}cekidch
 │ ⿻ ${prefix}join
@@ -1071,11 +950,8 @@ ${menuCategories}
 │ ⿻ ${prefix}add
 │ ⿻ ${prefix}everyone
 │ ⿻ ${prefix}hidetag
-<<<<<<< HEAD
-=======
 │ ⿻ ${prefix}tagall
 │ ⿻ ${prefix}getpp
->>>>>>> f110bc2 (update)
 │ ⿻ ${prefix}delete
 │ ⿻ ${prefix}rvo
 │ ⿻ ${prefix}opentime
@@ -1092,10 +968,6 @@ ${menuCategories}
 │ ⿻ ${prefix}smeme
 │ ⿻ ${prefix}emojimix
 │ ⿻ ${prefix}qcwhite
-<<<<<<< HEAD
-│ ⿻ ${prefix}wasted
-=======
->>>>>>> f110bc2 (update)
 ┗─────────────❐
 
 ┏─『 \`STICKER MENU\` 』
@@ -1136,10 +1008,7 @@ ${menuCategories}
 │ ⿻ ${prefix}tikstalk 
 │ ⿻ ${prefix}githubstalk
 │ ⿻ ${prefix}igstalk
-<<<<<<< HEAD
-=======
 │ ⿻ ${prefix}wastalk
->>>>>>> f110bc2 (update)
 ┗─────────────❐
 
 ┏─『 \`PRIMBON MENU\` 』
@@ -1150,13 +1019,10 @@ ${menuCategories}
 │ ⿻ ${prefix}watakcek [text]
 │ ⿻ ${prefix}cebelapaimutci [text]
 │ ⿻ ${prefix}hobycek [text]
-<<<<<<< HEAD
-=======
 │ ⿻ ${prefix}cekkodam [nama]
 │ ⿻ ${prefix}fitnah
 │ ⿻ ${prefix}jadian
 │ ⿻ ${prefix}jodohku
->>>>>>> f110bc2 (update)
 ┗─────────────❐
 
 ┏─『 \`GAME MENU\` 』
@@ -1176,19 +1042,13 @@ ${menuCategories}
 ┗─────────────❐
 
 ┏─『 \`TOOLS MENU\` 』
-<<<<<<< HEAD
-=======
 │ ⿻ ${prefix}get
->>>>>>> f110bc2 (update)
 │ ⿻ ${prefix}spam-ngl
 │ ⿻ ${prefix}hitamkan
 │ ⿻ ${prefix}hd
 │ ⿻ ${prefix}remini
 │ ⿻ ${prefix}tourl
-<<<<<<< HEAD
-=======
 │ ⿻ ${prefix}tourlv2
->>>>>>> f110bc2 (update)
 │ ⿻ ${prefix}ssweb
 │ ⿻ ${prefix}translate 
 │ ⿻ ${prefix}languages
@@ -1223,12 +1083,6 @@ ${menuCategories}
 > type this to get the script:
 > *.script*
         `;
-<<<<<<< HEAD
-     fuzzy.sendMessage(from, {
-        image: { url: global.menuimgUrl },
-        caption: menu
-    });
-=======
       fuzzy.sendMessage(
         m.chat, {
           text: menu,
@@ -1249,7 +1103,6 @@ ${menuCategories}
           quoted: m
         }
       );
->>>>>>> f110bc2 (update)
     } else {
 let menuCategoriess = "";
 if (categories.length > 0) {
@@ -1285,32 +1138,22 @@ ${menuCategoriess}
 </> .ping
 </> .owner
 
-<<<<<<< HEAD
-=======
 🏷 *SETTING*
 </> ${prefix}onlyadmin on/off
 </> ${prefix}addadmin
 </> ${prefix}deladmin
 </> ${prefix}listadmin
 
->>>>>>> f110bc2 (update)
 🏷 *OWNER MENU*
 </> ${prefix}setmenu nobutton/button
 </> ${prefix}mode self/public
 </> ${prefix}onlygc on/off
 </> ${prefix}setimgmenu
-<<<<<<< HEAD
-</> ${prefix}setimgbot
-</> ${prefix}setbotname
-</> ${prefix}delsampah
-</> ${prefix}delsesi
-=======
 </> ${prefix}setimgreply
 </> ${prefix}setbotname
 </> ${prefix}delsampah
 </> ${prefix}delsesi
 </> ${prefix}upsw
->>>>>>> f110bc2 (update)
 </> ${prefix}backup
 </> ${prefix}getsession
 </> ${prefix}join
@@ -1339,11 +1182,8 @@ ${menuCategoriess}
 </> ${prefix}add
 </> ${prefix}everyone
 </> ${prefix}hidetag
-<<<<<<< HEAD
-=======
 </> ${prefix}tagall
 </> ${prefix}getpp
->>>>>>> f110bc2 (update)
 </> ${prefix}delete
 </> ${prefix}rvo
 </> ${prefix}opentime
@@ -1358,10 +1198,6 @@ ${menuCategoriess}
 </> ${prefix}smeme
 </> ${prefix}emojimix
 </> ${prefix}qcwhite
-<<<<<<< HEAD
-</> ${prefix}wasted
-=======
->>>>>>> f110bc2 (update)
 
 🏷 *STICKER MENU*
 </> ${prefix}kuromi
@@ -1397,10 +1233,7 @@ ${menuCategoriess}
 </> ${prefix}tikstalk 
 </> ${prefix}githubstalk
 </> ${prefix}igstalk
-<<<<<<< HEAD
-=======
 </> ${prefix}wastalk
->>>>>>> f110bc2 (update)
 
 🏷 *PRIMBON MENU*
 </> ${prefix}apakah [text]
@@ -1410,13 +1243,10 @@ ${menuCategoriess}
 </> ${prefix}watakcek [text]
 </> ${prefix}cebelapaimutci [text]
 </> ${prefix}hobycek [text]
-<<<<<<< HEAD
-=======
 </> ${prefix}cekkodam [nama]
 </> ${prefix}fitnah 
 </> ${prefix}jadian
 </> ${prefix}jodohku
->>>>>>> f110bc2 (update)
 
 🏷 *GAME MENU*
 </> ${prefix}tebak kata
@@ -1433,29 +1263,19 @@ ${menuCategoriess}
 </> ${prefix}tebak bendera2
 </> ${prefix}tebak jkt48
 
-<<<<<<< HEAD
-🏷 *TOOLS MENU*
-=======
 🏷 *QUOTED MENU*
->>>>>>> f110bc2 (update)
 </> ${prefix}quotes-en
 </> ${prefix}quotes
 </> ${prefix}quotesanime
 
 🏷 *TOOLS MENU*
-<<<<<<< HEAD
-=======
 </> ${prefix}get
->>>>>>> f110bc2 (update)
 </> ${prefix}spam-ngl
 </> ${prefix}hitamkan
 </> ${prefix}hd
 </> ${prefix}remini
 </> ${prefix}tourl
-<<<<<<< HEAD
-=======
 </> ${prefix}tourlv2
->>>>>>> f110bc2 (update)
 </> ${prefix}ssweb
 </> ${prefix}translate 
 </> ${prefix}languages
@@ -1470,8 +1290,6 @@ ${menuCategoriess}
 </> ${prefix}dellrespon
 </> ${prefix}listrespon
 
-<<<<<<< HEAD
-=======
 ┏─ *TQ TO:*
 │   - ${global.ownername} (owner)
 │   - xZiyy
@@ -1480,7 +1298,6 @@ ${menuCategoriess}
 │   - Clairity Api
 │   - And All Creator
 ┗─────────────❐
->>>>>>> f110bc2 (update)
 > click the button to get script
         `;
 await fuzzy.sendMessage(m.chat, {
@@ -1530,8 +1347,6 @@ await fuzzy.sendMessage(m.chat, {
 
 }
 break;
-<<<<<<< HEAD
-=======
 case "addadmin": {
   if (!isCreator) return reply(mess.owner);
 
@@ -1571,7 +1386,6 @@ case "listadmin": {
   reply(`Daftar admin:\n\n${list}`);
 }
 break
->>>>>>> f110bc2 (update)
 //======[ AI ]======\\
 case 'yousearch': {
   let input = `Ex : ${prefix + command} Siapakah Presiden Indonesia Sekarang`
@@ -1736,23 +1550,6 @@ break
 
 case "addlist":
 case "addrespon": {
-<<<<<<< HEAD
-if (!isCreator) return reply(mess.owner)
-if (!text) return m.reply("cmd|responnya")
-if (!text.split("|")) return m.reply("cmd|responnya")
-let result = text.split("|")
-if (result.length < 2) return m.reply("cmd|responnya")
-const [ cmd, respon ] = result
-let res = list.find(e => e.cmd == cmd.toLowerCase())
-if (res) return m.reply("Cmd respon sudah ada")
-let obj = {
-cmd: cmd.toLowerCase(), 
-respon: respon
-}
-list.push(obj)
-fs.writeFileSync("./media/database/list.json", JSON.stringify(list, null, 2))
-m.reply(`Berhasil menambah cmd respon *${cmd.toLowerCase()}* kedalam database respon`)
-=======
     if (!isCreator) return reply(mess.owner)
     if (!text) return m.reply("cmd|respon [|url_gambar]")
 
@@ -1788,7 +1585,6 @@ case "delrespon": {
     list.splice(index, 1)
     fs.writeFileSync("./media/database/list.json", JSON.stringify(list, null, 2))
     m.reply(`Berhasil menghapus cmd respon *${text.toLowerCase()}* dari database`)
->>>>>>> f110bc2 (update)
 }
 break
 case 'rvo':
@@ -1973,17 +1769,6 @@ case "addrespon":
 case "additems":
 case "addperintah": {
     if (!isCreator) return reply(mess.owner)
-<<<<<<< HEAD
-    if (!text) return m.reply("Format: .addperintah menu|perintah|responnya")
-    
-    const parts = text.split("|");
-    if (parts.length < 3) return m.reply("Format tidak valid! Gunakan: menu|perintah|responnya");
-    
-    const categoryName = parts[0].toLowerCase();
-    const cmdName = parts[1].toLowerCase().trim();
-    const respon = parts[2].trim();
-    
-=======
     if (!text) return m.reply("Format: .addperintah kategori|perintah|respon[|url_gambar]")
     
     const parts = text.split("|");
@@ -1994,30 +1779,12 @@ case "addperintah": {
     const respon = parts[2].trim();
     const image = parts[3] ? parts[3].trim() : null;
 
->>>>>>> f110bc2 (update)
     let categories = [];
     try {
         categories = JSON.parse(fs.readFileSync("./media/database/listmenurespon.json"));
     } catch (err) {
         return m.reply("Database menu kosong atau tidak ditemukan!");
     }
-<<<<<<< HEAD
-    
-    let category = categories.find(cat => cat.category === categoryName);
-    if (!category) return m.reply(`Kategori *${categoryName}* tidak ditemukan! Buat dulu dengan .addcategory`);
-    
-    let existingItem = category.items.find(item => item.cmd === cmdName);
-    if (existingItem) return m.reply(`Perintah *${cmdName}* sudah ada dalam kategori *${categoryName}*!`);
-    
-    category.items.push({
-        cmd: cmdName,
-        respon: respon
-    });
-    
-    // Simpan perubahan
-    fs.writeFileSync("./media/database/listmenurespon.json", JSON.stringify(categories, null, 2));
-    
-=======
 
     let category = categories.find(cat => cat.category === categoryName);
     if (!category) return m.reply(`Kategori *${categoryName}* tidak ditemukan! Buat dulu dengan .addcategory`);
@@ -2036,24 +1803,12 @@ case "addperintah": {
     // Simpan perubahan
     fs.writeFileSync("./media/database/listmenurespon.json", JSON.stringify(categories, null, 2));
 
->>>>>>> f110bc2 (update)
     m.reply(`Berhasil menambahkan perintah *${cmdName}* ke kategori *${categoryName}*!`);
 }
 break;
 
 case "dellperintah": {
     if (!isCreator) return reply(mess.owner)
-<<<<<<< HEAD
-    if (!text) return m.reply("Format: .dellperintah menunya|perintahnya")
-    
-    const parts = text.split("|");
-    if (parts.length < 2) return m.reply("Format tidak valid! Gunakan: .dellperintah menunya|perintahnya");
-    
-    const categoryName = parts[0].toLowerCase();
-    const cmdName = parts[1].toLowerCase().trim();
-
-   let categories = [];
-=======
     if (!text) return m.reply("Format: .dellperintah menu|perintah")
 
     const parts = text.split("|").map(part => part.trim());
@@ -2062,30 +1817,11 @@ case "dellperintah": {
     const [categoryName, cmdName] = parts;
 
     let categories = [];
->>>>>>> f110bc2 (update)
     try {
         categories = JSON.parse(fs.readFileSync("./media/database/listmenurespon.json"));
     } catch (err) {
         return m.reply("Database menu kosong atau tidak ditemukan!");
     }
-<<<<<<< HEAD
-    
-    let category = categories.find(cat => cat.category === categoryName);
-    if (!category) return m.reply(`menu *${categoryName}* tidak ditemukan!`);
-    
-    let itemIndex = category.items.findIndex(item => item.cmd === cmdName);
-    if (itemIndex === -1) return m.reply(`Perintah *${cmdName}* tidak ditemukan dalam menu *${categoryName}*!`);
-    
-    category.items.splice(itemIndex, 1);
-    
-    // Simpan perubahan
-    fs.writeFileSync("./media/database/listmenurespon.json", JSON.stringify(categories, null, 2));
-    
-    m.reply(`Berhasil menghapus perintah *${cmdName}* dari menu *${categoryName}*!`);
-}
-break;
-
-=======
 
     let category = categories.find(cat => cat.category === categoryName.toLowerCase());
     if (!category || !Array.isArray(category.items)) {
@@ -2103,7 +1839,6 @@ break;
     m.reply(`Berhasil menghapus perintah *${cmdName}* dari menu *${categoryName}*!`);
 }
 break;
->>>>>>> f110bc2 (update)
 case "menus": {
     let categories = [];
     try {
@@ -2150,8 +1885,6 @@ return m.reply("Berhasil mematikan *notifikasi* di grup ini")
 } else return m.reply("on/off")
 }
 break
-<<<<<<< HEAD
-=======
       case 'getpp': {
         try {
           ppuser = await fuzzy.profilePictureUrl(m.quoted.sender, 'image')
@@ -2185,7 +1918,6 @@ break
         );
       }
       break;
->>>>>>> f110bc2 (update)
       case "hidetag":
       case "z":
       case "h":
@@ -2265,108 +1997,6 @@ break
         }
       }
       break;
-<<<<<<< HEAD
-case 'update': {
-  if (!isCreator) return reply("Fitur ini hanya untuk owner.");
-
-  const fs = require('fs')
-  const { default: fetch } = require('node-fetch')
-  const { URL } = require('url')
-  const path = require('path')
-
-  const getDirectoriesRecursive = async (dir = './') => {
-    let results = []
-    const list = fs.readdirSync(dir)
-    for (let file of list) {
-      file = path.resolve(dir, file)
-      const stat = fs.statSync(file)
-      if (stat && stat.isDirectory()) {
-        results.push(file + '/')
-        results = results.concat(await getDirectoriesRecursive(file))
-      }
-    }
-    return results
-  }
-
-  let folders = await getDirectoriesRecursive()
-  await reply("Sedang mengunduh update...")
-
-  let changed = `*📂 File Changed:*`
-  let modified = ''
-  let newfile = ''
-  let failed = '\n*❗ Failed:*'
-
-  const urls = [
-    "https://raw.githubusercontent.com/xZiyy/clairity/refs/heads/master/connect/xZiyy.js"
-  ]
-
-  const urlPath = urls.map(link => {
-    try {
-      const { pathname, host } = new URL(link)
-      let isValidHost = ['raw.githubusercontent.com'].includes(host)
-      if (!isValidHost) {
-        failed += `\n- ${link}\n> Invalid host`
-        return null
-      }
-
-      let f = (host === "raw.githubusercontent.com"
-        ? pathname.split("heads/")[1]
-        : pathname)
-        ?.split('/')?.slice(1)?.join('/')?.split('/')
-
-      const filename = f.slice(-1)[0]
-      if (!filename) {
-        failed += `\n- ${link}\n> File kosong`
-        return null
-      }
-
-      const _path = f.slice(0, -1).join('/')
-
-      for (const folder of folders) {
-        const folderPath = folder.split('./')[1].slice(0, -1)
-
-        if (folderPath.includes(_path) && _path) {
-          return [link, `${folder}${filename}`]
-        }
-
-        if (filename === 'xZiyy.js') {
-          return [link, `./${filename}`]
-        }
-      }
-
-      failed += `\n- ${link}\n> Folder tidak ditemukan`
-      return null
-
-    } catch (err) {
-      failed += `\n- ${link}\n> ${err.message}`
-      return null
-    }
-  }).filter(Boolean)
-
-  for (let [url, fpath] of urlPath) {
-    try {
-      let res = await fetch(url)
-      if (!res.ok) {
-        failed += `\n- ${url}\n> Gagal fetch file`
-        continue
-      }
-      let buff = await res.text()
-      let isExists = fs.existsSync(fpath)
-      if (isExists) modified += `\n- \`modifed\`: ${fpath}`
-      else newfile += `\n- \`new\`: ${fpath}`
-      fs.writeFileSync(fpath, buff)
-    } catch (err) {
-      failed += `\n- ${url}\n> ${err.message}`
-    }
-  }
-
-  let text = `*[ 🛠️ ] UPDATE*\n\n${changed}${modified}${newfile}`
-  if (failed.length > 12) text += failed
-  reply(text)
-}
-break
-=======
->>>>>>> f110bc2 (update)
 case 'setppgroup':
 case 'setppgrup':
 case 'setppgc': {
@@ -2418,10 +2048,7 @@ break;
 case 'closetime':
 if (!isGroup) return reply(mess.group)
 if (!isBotAdmins) return reply(mess.Badmin)
-<<<<<<< HEAD
-=======
 if (!isAdmins && !isCreator) return reply('only admin')
->>>>>>> f110bc2 (update)
 if (args[1] == "detik") {
   var timer = args[0] * `1000`
 } else if (args[1] == "menit") {
@@ -2444,10 +2071,7 @@ break
 case 'opentime':
 if (!isGroup) return reply(mess.group)
 if (!isBotAdmins) return reply(mess.Badmin)
-<<<<<<< HEAD
-=======
   if (!isAdmins && !isCreator) return reply('only admin')
->>>>>>> f110bc2 (update)
 if (args[1] == "detik") {
   var timer = args[0] * `1000`
 } else if (args[1] == "menit") {
@@ -2492,11 +2116,7 @@ case 'add': {
 }
 break
 case 'kick': {
-<<<<<<< HEAD
-  if (m?.isGroup && !isAdmins && !isGroupOwner && isBotAdmins) return reply('only admin')
-=======
   if (m?.isGroup && !isAdmins && !isGroupOwner && isBotAdmins && !isCreator) return reply('only admin')
->>>>>>> f110bc2 (update)
   let users = m?.quoted ? m?.quoted.sender : text.replace(/[^0-9]/g, '') + '@s.whatsapp.net'
   await fuzzy.groupParticipantsUpdate(m?.chat, [users], 'remove').catch(console.log)
   m.reply('bye bye kasian deh')
@@ -2654,57 +2274,6 @@ case 'tiksave': {
 break;
 
 
-<<<<<<< HEAD
-case 'tt':
-case 'tiktok': {
-  try {
-    if (!text.startsWith('http')) return reply("Masukkan URL yang valid.");
-    m.reply('_Mohon tunggu, sedang memproses..._')
-    const apiUrl = `${apiUrlw}/api/tiktok?url=${text}`;
-    const response = await axios.get(apiUrl);
-    const {
-      status,
-      result
-    } = response.data;
-
-    if (!status) {
-      return reply("Gagal mendapatkan data. Pastikan URL valid.");
-    }
-
-    const title = result.title || "Judul tidak tersedia";
-    const author = result.author || "Pembuat tidak diketahui";
-    const {
-      nowm,
-      audio
-    } = result;
-
-    let key = await fuzzy.sendMessage(m.chat, {
-      video: {
-        url: nowm,
-      },
-      caption: ` Judul: ${title}\n Pembuat: ${author}`,
-      fileName: `tiktok.mp4`,
-      mimetype: 'video/mp4'
-    }, {
-      quoted: m
-    });
-
-    await fuzzy.sendMessage(m.chat, {
-      audio: {
-        url: audio,
-      },
-      fileName: `tiktok.mp3`,
-      mimetype: 'audio/mp4'
-    }, {
-      quoted: key
-    });
-  } catch (error) {
-    console.error("Error fetching TikTok data:", error);
-    reply("Maaf, terjadi kesalahan saat mengambil data TikTok.");
-  }
-}
-break;
-=======
 case 'tiktok':
 case 'tt': {
     const headers = {
@@ -2890,19 +2459,14 @@ break
 				}
 			}
 			break
->>>>>>> f110bc2 (update)
  case 'ytmp3': {
        
   if (!text) return reply(`Gunakan dengan format ${command} link\n\nContoh:\n\n${command} link`);
   
   try {
-<<<<<<< HEAD
-
-=======
     reply(`⏳ Sedang mengunduh audio...\n\n${result.title}`);
     
     
->>>>>>> f110bc2 (update)
     // Gunakan scraper baru (Ytdl function)
     const result = await yetedln(text, "audio", "320");
     
@@ -2926,11 +2490,6 @@ break
     };
 
     // Kirim pesan sedang diproses
-<<<<<<< HEAD
-    reply(`⏳ Sedang mengunduh audio...\n\n${result.title}`);
-    
-=======
->>>>>>> f110bc2 (update)
     // Kirim audio
     await fuzzy.sendMessage(from, doc, {
       quoted: m
@@ -3031,8 +2590,6 @@ break;
         }
       }
       break
-<<<<<<< HEAD
-=======
       case 'get': {
         if (!text) return m.reply(`awali *URL* dengan http:// atau https://`)
         try {
@@ -3104,16 +2661,12 @@ break;
         }
       }
       break
->>>>>>> f110bc2 (update)
 case 'ytmp4': {
   if (!text) return reply(`Gunakan dengan format ${command} link\n\nContoh:\n\n${command} link`);
           
   try {
-<<<<<<< HEAD
-=======
     reply(`⏳ Sedang mengunduh video...\n\n${result.title}\nKualitas: ${result.quality}`);
     
->>>>>>> f110bc2 (update)
     // Tentukan kualitas video, default ke 720p jika tidak ditentukan
     let quality = "720";
     
@@ -3121,10 +2674,6 @@ case 'ytmp4': {
     const result = await yetedln(text, "video", quality);
     
     // Kirim pesan sedang diproses
-<<<<<<< HEAD
-    reply(`⏳ Sedang mengunduh video...\n\n${result.title}\nKualitas: ${result.quality}`);
-=======
->>>>>>> f110bc2 (update)
     
     // Kirim video
     await fuzzy.sendMessage(from, {
@@ -3447,9 +2996,6 @@ case 'caribuku': {
   }
 }
 break;
-<<<<<<< HEAD
-
-=======
 			case 'wastalk': case 'whatsappstalk': {
 				if (!text) return m.reply(`Example: ${prefix + command} @tag / 628xxx`)
 				try {
@@ -3472,7 +3018,6 @@ break;
 			}
 			break
 	
->>>>>>> f110bc2 (update)
 case 'rumaysho': {
   if (!text) return reply(`Gunakan dengan cara ${command} *topik*\n\n_Contoh_\n\n${command} Jum'at`);
 
@@ -3860,8 +3405,6 @@ _${ngawi.quote}_
         });
       }
       break;
-<<<<<<< HEAD
-=======
 			case 'jodohku': {
 				if (!m.isGroup) return m.reply(mess.group)
 				let member = (store.groupMetadata[m.chat] ? store.groupMetadata[m.chat].participants : m.metadata.participants).map(a => a.id)
@@ -4006,7 +3549,6 @@ _${ngawi.quote}_
         });
       }
       break
->>>>>>> f110bc2 (update)
 //======[ TOOLS ]======\\
 case 'ssweb': {
   if (!text) return reply(`Gunakan dengan cara ${command} *link*\n\n_Contoh_\n\n${command} https://xZiyy.com`);
@@ -4019,8 +3561,6 @@ case 'ssweb': {
   fuzzy.sendFile(m?.chat, ss, "", "Done", m);
 }
 break;
-<<<<<<< HEAD
-=======
 			case 'tourlv2': {
 				try {
 					if (/webp|video|sticker|audio|jpg|jpeg|png/.test(mime)) {
@@ -4034,7 +3574,6 @@ break;
 				}
 			}
 			break
->>>>>>> f110bc2 (update)
     case 'tourl': {
         if (!quoted) return reply(`Send/Reply Media With Captions ${prefix + command}`)
         try {
@@ -4231,39 +3770,6 @@ case 'owner': {
 }
 break
 case 'setimgmenu': {
-<<<<<<< HEAD
-  if (!isCreator) return reply(mess.owner)
-         if (!quoted) return reply(`Send/Reply Media With Captions ${prefix + command}`)
-        try {
-          let media = await fuzzy.downloadAndSaveMediaMessage(quoted, makeid(5))
-          let url = await exec(`curl -F "reqtype=fileupload" -F "userhash=" -F "fileToUpload=@${media}" https://catbox.moe/user/api.php`, (error, stdout, stderr) => {
-  global.menuimgUrl = stdout
-  reply(`succes`)
-            })
-        }
-        catch (error) {
-          console.log(error)
-          return reply("Error...")
-        }
-
-}
-break
-case 'setimgreply': {
-  if (!isCreator) return reply(mess.owner)
-         if (!quoted) return reply(`Send/Reply Media With Captions ${prefix + command}`)
-        try {
-          let media = await fuzzy.downloadAndSaveMediaMessage(quoted, makeid(5))
-          let url = await exec(`curl -F "reqtype=fileupload" -F "userhash=" -F "fileToUpload=@${media}" https://catbox.moe/user/api.php`, (error, stdout, stderr) => {
-  global.imgUrl = stdout
-  reply(`succes`)
-            })
-        }
-        catch (error) {
-          console.log(error)
-          return reply("Error...")
-        }
-
-=======
 	if (!isCreator) return reply(mess.owner)
 	if (!quoted) return reply(`Send/Reply Media With Captions ${prefix + command}`)
 	try {
@@ -4292,7 +3798,6 @@ case 'setimgreply': {
 		console.log(error)
 		return reply("Gagal upload ke server!")
 	}
->>>>>>> f110bc2 (update)
 }
 break
 case 'setbotname': {
@@ -4345,8 +3850,6 @@ case 'banchat': {
 }
 break
 
-<<<<<<< HEAD
-=======
 case 'onlyadmin': {
   if (!isCreator) return reply(mess.owner)
   if (args[0] == "off") {
@@ -4360,7 +3863,6 @@ case 'onlyadmin': {
   }
 }
 break
->>>>>>> f110bc2 (update)
 case 'mode': {
   if (!isCreator) return reply(mess.owner)
   if (args[0] == "public") {
@@ -4368,11 +3870,7 @@ case 'mode': {
     db.data.settings[botNumber].public = true
     reply("Mode Public Telah Active")
   } else if (args[0] == "self") {
-<<<<<<< HEAD
-    if (db.data.settings[botNumber].public == false) return reply("Sudah Off")
-=======
     if (db.data.settings[botNumber].public == false) return reply("Sudah on")
->>>>>>> f110bc2 (update)
     db.data.settings[botNumber].public = false
     reply("Mode Self Telah Active")
   }
@@ -4770,11 +4268,7 @@ break;
       }
       break;
       case 'bisakah': {
-<<<<<<< HEAD
-        if (!m.isGroup) return reply(acn.group)
-=======
         if (!m.isGroup) return reply(mess.group)
->>>>>>> f110bc2 (update)
         const bisakah = body.slice(0)
         const bisa = ['BISA', 'Tidak Bisa', 'Oh tentu saja bisa dong', 'Udah dari lahir dia bisa kaya gitu kak 😂˜„', 'Oh tentu saja tidak bisa', 'Wuih bisa bisa', 'Ga mao jawab ah lu wibu', 'Tentu saja bisa eh tapi boong awokawok ', 'Engga engga dia ga bisa', 'Enggaklah', 'Aku ga mao jawbab 😆™‚', 'Rahasia dong', 'Ulangi Tod gua ga paham', 'Mana gua tau anjir']
         const keh = bisa[Math.floor(Math.random() * bisa.length)]
@@ -5257,11 +4751,6 @@ break
             reply("Gagal mengambil data dari API.");
           }
         }
-<<<<<<< HEAD
-        else reply(`- GAME TEBAK -\n\n.tebak kata\n.tebak tebakan\n.tebak bendera\n.tebak kalimat\n.tebak lirik\n.tebak tekateki\n.tebak siapakahaku\n.tebak asahotak\n.tebak susunkata\n.tebak kimia\n.tebak kabupaten\n.tebak gambar\n.tebak bendera2\n.tebak jkt48`)
-      }
-      break
-=======
         else reply(`- GAME TEBAK -\n\n.tebak kata\n.tebak tebakan\n.tebak bendera\n.tebak kalimat\n.tebak lirik\n.tebak tekateki\n.tebak siapakahaku\n.tebak asahotak\n.tebak susunkata\n.tebak kimia\n.tebak gambar\n.tebak bendera2\n.tebak jkt48`)
       }
       break
@@ -5301,7 +4790,6 @@ case 'pushkontak': {
     reply(`sukses pushkontak delay 1 menit`)
 }
 break
->>>>>>> f110bc2 (update)
 
 default:
   function resetSession(user) {
@@ -5352,10 +4840,7 @@ if (!m.isBaileys && !isBot && !isCmd && body != "") {
     const prompt = `
 ${global.prompt}
 
-<<<<<<< HEAD
-=======
 ## anggap kamu sedang di sesi percakapan dan kamu memiliki sesi percakapan
->>>>>>> f110bc2 (update)
 ## Berikut adalah sesi percakapan sebelumnya (jika ada):
 ${userSession || "(Tidak ada sesi sebelumnya)"}
 
@@ -5363,11 +4848,7 @@ ${userSession || "(Tidak ada sesi sebelumnya)"}
 
     // Gunakan axios.get dengan query langsung di URL
     let { data } = await axios.get(
-<<<<<<< HEAD
-      `https://api.siputzx.my.id/api/ai/llama?prompt=${encodeURIComponent(prompt)}&message=${body}`
-=======
     `https://api.siputzx.my.id/api/ai/deepseek-r1?content=${body}`
->>>>>>> f110bc2 (update)
     );
 
     if (data.status) {
