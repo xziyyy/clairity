@@ -12,36 +12,23 @@ const version = require("@whiskeysockets/baileys/package.json").version
 // contoh ['1','2','3']
 // ['1','2','3','4']
 global.ownerNumber = [`${global.owner}`,'no2','no3'] // no owner yang dapat mengakses all fitur
-<<<<<<< HEAD
-=======
 global.firstbotname = "clairity" // nama depan bot kalian
->>>>>>> f110bc2 (update)
 global.email = "@gmail.com" // kosongkan jika tidak punya
 global.web = ".com" // kosongkan jika tidak punya
 global.location = "Banten" // isi daerah mu atau tempat tinggal mu jika tidak mau kosongkan
 global.packname = "Mayura bot" // wm yg ada di sticker
 global.author = "dibuat oleh xZiyy" // wm yg ada di sticker
-<<<<<<< HEAD
-global.imgUrl = "https://files.catbox.moe/s99a5l.jpg" // ubah menggunakan !setimgbot
-global.menuimgUrl = "https://files.catbox.moe/7lo0hv.jpg" // ubah menggunakan !setimgmenu
-=======
 global.imgUrl = "https://files.catbox.moe/jzjj0n.jpg" // ubah menggunakan !setimgreply
 global.menuimgUrl = "https://files.catbox.moe/v2n8br.jpg" // ubah menggunakan !setimgmenu
 
 global.linkgc = "https://chat.whatsapp.com/C9YprGwjch81wh88uCp6lu"
->>>>>>> f110bc2 (update)
 
 global.sewatext = `
 (+) OPEN SEWA BOT
 
 - Price List
-<<<<<<< HEAD
-   • Rp. 10.000 (bulan)
-   • Rp. 50.000 (permanent)
-=======
    • Rp. 10.000 (minggu)
    • Rp. 15.000 (bulan)
->>>>>>> f110bc2 (update)
   
   <\> Keuntungan
   - Antilink group
