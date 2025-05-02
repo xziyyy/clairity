@@ -1132,7 +1132,7 @@ if (categories.length > 0) {
 ${menuCategoriess}
 
 🏷 *MAIN MENU*
-</> .sewa
+</> .sewabot
 </> .script
 </> .tes
 </> .ping
@@ -1143,6 +1143,12 @@ ${menuCategoriess}
 </> ${prefix}addadmin
 </> ${prefix}deladmin
 </> ${prefix}listadmin
+
+🏷 *SETTING*
+</> ${prefix}sewa add
+</> ${prefix}sewa del
+</> ${prefix}sewa list
+</> ${prefix}sewa check
 
 🏷 *OWNER MENU*
 </> ${prefix}setmenu nobutton/button
