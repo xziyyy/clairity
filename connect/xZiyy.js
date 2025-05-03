@@ -3127,7 +3127,37 @@ break;
 				}
 			}
 			break
-	
+case 'update': {
+	if (!text) return m.reply('Masukkan URL raw file GitHub yang ingin diupdate!')
+
+	const axios = require('axios')
+	const fs = require('fs')
+	const path = require('path')
+
+	try {
+		const url = text.trim()
+		if (!url.startsWith('https://raw.githubusercontent.com')) {
+			return m.reply('URL harus berupa link `raw.githubusercontent.com`.')
+		}
+
+		const relativePath = url.split('/master/')[1] // ambil path setelah /master/
+		if (!relativePath) return m.reply('Gagal mengambil path dari URL.')
+
+		const fullPath = path.join(__dirname, relativePath)
+
+		// Pastikan folder-nya ada
+		fs.mkdirSync(path.dirname(fullPath), { recursive: true })
+
+		const { data } = await axios.get(url)
+		fs.writeFileSync(fullPath, data, 'utf-8')
+
+		m.reply(`✅ Berhasil mengupdate *${relativePath}*\n\nSilakan restart bot jika diperlukan.`)
+	} catch (e) {
+		console.error(e)
+		m.reply('Gagal mengupdate. Cek URL atau struktur folder-nya.')
+	}
+}
+break
 case 'rumaysho': {
   if (!text) return reply(`Gunakan dengan cara ${command} *topik*\n\n_Contoh_\n\n${command} Jum'at`);
 
