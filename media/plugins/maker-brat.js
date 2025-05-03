@@ -11,7 +11,7 @@ module.exports = {
             return reply('Jangan ada spasi antara titik dan brat!!');
         }
 
-        const clairityApi = `https://brat.caliphdev.com/api/brat?text=${encodeURIComponent(q.trim())}`;
+        const clairityApi = `https://aqul-brat.hf.space/?text=${encodeURIComponent(q.trim())}`;
         const siputApi = `https://clairity-nine.vercel.app/api/brat?text=${encodeURIComponent(q.trim())}`;
 
        reply('_Tunggu sebentar, sedang memproses..._')
