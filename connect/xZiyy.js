@@ -2205,41 +2205,145 @@ case 'fbdl': {
   }
 }
 break;
-case 'igdl': {
-  reply('Tunggu sebentar, sedang mengunduh video dari Instagram...');
+      case 'igdl':
+      case 'instagram':
+      case 'instadl': {
+        if (!text) return m.reply('Berikan link Instagram yang ingin di-download');
 
-  async function fetchInstagramVideo(url) {
-    const res = await axios.get(`${apiUrlw}/api/ig-indownloader?url=${encodeURIComponent(url)}`);
-    return res.data;
-  }
+        const instaDl = {
+          dl: async (link) => {
+            try {
+              const {
+                data
+              } = await axios.post('https://yt1s.io/api/ajaxSearch',
+                new URLSearchParams({
+                  p: 'instagram',
+                  q: link,
+                  lang: 'en'
+                }), {
+                  headers: {
+                    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
+                    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+                  },
+                }
+              );
 
-  const igUrl = args[0]; // Link Instagram diberikan sebagai argumen
+              if (data.status !== 'ok') throw new Error('Tidak ada respons dari API');
 
-  if (!igUrl) {
-    return m.reply('Masukkan URL Instagram yang ingin diunduh.');
-  }
+              const $ = cheerio.load(data.data);
+              const results = $('a.abutton.is-success.is-fullwidth')
+                .map((_, el) => ({
+                  title: $(el).text().includes('Video') ? 'Download Video' : 'Download Image',
+                  url: $(el).attr('href'),
+                  sourceUrl: link
+                }))
+                .get();
 
-  try {
-    const result = await fetchInstagramVideo(igUrl);
+              return results;
+            }
+            catch (error) {
+              console.error('Error fetching Instagram download links:', error);
+              throw error;
+            }
+          }
+        };
 
-    if (!result || result.length === 0) {
-      return m.reply('Gagal mengunduh video. Pastikan URL benar.');
-    }
+        try {
+          const results = await instaDl.dl(text);
 
-    const {
-      url
-    } = result[0];
+          if (results.length === 0) {
+            return m.reply('Tidak ada hasil yang ditemukan.');
+          }
 
-    m.reply('Video berhasil ditemukan! Mengirim video...');
-    await fuzzy.sendFile(m.chat, url, 'ig_video.mp4', 'Berikut video yang berhasil diunduh.', m);
-  } catch (error) {
-    console.error('Error fetching Instagram video:', error);
-    m.reply('Maaf, terjadi kesalahan saat mengunduh video.');
-  }
+          const images = results.filter(item => item.title.includes('Image'));
+          const videos = results.filter(item => item.title.includes('Video'));
 
-}
-break;
+          // Kirim video menggunakan sendMessage jika ada video
+          if (videos.length > 0) {
+            for (const video of videos) {
+              await fuzzy.sendMessage(from, {
+                video: {
+                  url: video.url
+                },
+                caption: `Download Video\n\nSumber: ${video.sourceUrl}`,
+              });
+            }
+          }
+          else if (images.length > 0) {
+            // Kirim gambar hanya jika tidak ada video
+            const formattedImages = images.map(item => ({
+              url: item.url,
+              sourceUrl: item.sourceUrl,
+              title: item.title,
+            }));
 
+            async function generateCarouselMessage(imageData, from, headerText = "Berikut adalah hasil download Instagram:") {
+              const cardsPromises = imageData.map(async data => {
+                const preparedMedia = await prepareWAMessageMedia({
+                  image: {
+                    url: data.url
+                  },
+                }, {
+                  upload: fuzzy.waUploadToServer
+                });
+
+                return {
+                  header: {
+                    hasMediaAttachment: true,
+                    ...preparedMedia
+                  },
+                  body: {
+                    text: data.title
+                  },
+                  nativeFlowMessage: {
+                    buttons: [{
+                      name: "cta_url",
+                      buttonParamsJson: JSON.stringify({
+                        display_text: "Sumber",
+                        url: data.sourceUrl,
+                      }),
+                    }],
+                  },
+                };
+              });
+
+              const cards = await Promise.all(cardsPromises);
+
+              const carouselMessage = {
+                cards,
+                messageVersion: 1,
+              };
+
+              const msg = generateWAMessageFromContent(
+                from, {
+                  viewOnceMessage: {
+                    message: {
+                      interactiveMessage: {
+                        body: {
+                          text: headerText
+                        },
+                        carouselMessage,
+                      },
+                    },
+                  },
+                }, {}
+              );
+
+              await fuzzy.relayMessage(from, msg.message, {
+                messageId: msg.key.id
+              });
+            }
+
+            await generateCarouselMessage(formattedImages, from);
+          }
+         
+        }
+        catch (error) {
+          console.error('Error in Instagram download process:', error);
+          return m.reply('Terjadi kesalahan saat mencoba mendownload. Pastikan link valid.');
+        }
+      }
+      break;
 case 'tiksave': {
   reply('Tunggu sebentar, sedang mengunduh video TikTok...');
 
@@ -3411,21 +3515,35 @@ _${ngawi.quote}_
         });
       }
       break;
-			case 'jodohku': {
-				if (!m.isGroup) return m.reply(mess.group)
-				let member = (store.groupMetadata[m.chat] ? store.groupMetadata[m.chat].participants : m.metadata.participants).map(a => a.id)
-				let jodoh = pickRandom(member)
-				m.reply(`👫Jodoh mu adalah\n@${m.sender.split('@')[0]} ❤ @${jodoh.split('@')[0]}`);
-			}
-			break
-			case 'jadian': {
-				if (!m.isGroup) return m.reply(mess.group)
-				let member = (store.groupMetadata[m.chat] ? store.groupMetadata[m.chat].participants : m.metadata.participants).map(a => a.id)
-				let jadian1 = pickRandom(member)
-				let jadian2 = pickRandom(member)
-				m.reply(`Ciee yang Jadian💖 Jangan lupa Donasi🗿\n@${jadian1.split('@')[0]} ❤ @${jadian2.split('@')[0]}`);
-			}
-			break
+case 'jodohku': {
+	if (!m.isGroup) return m.reply(mess.group)
+	const metadata = await fuzzy.groupMetadata(m.chat)
+	const member = metadata.participants.map(a => a.id).filter(id => id !== m.sender)
+	if (member.length < 1) return m.reply('Tidak cukup member untuk mencari jodoh.')
+	const jodoh = pickRandom(member)
+	await fuzzy.sendMessage(m.chat, {
+		text: `👫Jodoh mu adalah\n@${m.sender.split('@')[0]} ❤ @${jodoh.split('@')[0]}`,
+		mentions: [m.sender, jodoh]
+	}, { quoted: m })
+}
+break
+
+case 'jadian': {
+	if (!m.isGroup) return m.reply(mess.group)
+	const metadata = await fuzzy.groupMetadata(m.chat)
+	const member = metadata.participants.map(a => a.id)
+	if (member.length < 2) return m.reply('Tidak cukup member untuk dijodohkan.')
+	let j1, j2
+	do {
+		j1 = pickRandom(member)
+		j2 = pickRandom(member)
+	} while (j1 === j2)
+	await fuzzy.sendMessage(m.chat, {
+		text: `Ciee yang Jadian💖 Jangan lupa Donasi🗿\n@${j1.split('@')[0]} ❤ @${j2.split('@')[0]}`,
+		mentions: [j1, j2]
+	}, { quoted: m })
+}
+break
 			case 'fitnah': {
 				let [teks1, teks2, teks3] = text.split`|`
 				if (!teks1 || !teks2 || !teks3) return m.reply(`Example : ${prefix + command} pesan target|pesan mu|nomer/tag target`)
