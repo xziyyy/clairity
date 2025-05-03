@@ -3161,6 +3161,7 @@ break
 case 'helloini':{
 reply('succes')
 }
+break
 case 'rumaysho': {
   if (!text) return reply(`Gunakan dengan cara ${command} *topik*\n\n_Contoh_\n\n${command} Jum'at`);
 
