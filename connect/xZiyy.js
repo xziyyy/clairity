@@ -3128,7 +3128,7 @@ break;
 			}
 			break
 case 'update': {
-	if (!text) return m.reply('Masukkan URL raw file GitHub yang ingin diupdate!')
+	if (!text) return m.reply('Masukkan URL raw GitHub yang ingin diupdate!')
 
 	const axios = require('axios')
 	const fs = require('fs')
@@ -3137,24 +3137,25 @@ case 'update': {
 	try {
 		const url = text.trim()
 		if (!url.startsWith('https://raw.githubusercontent.com')) {
-			return m.reply('URL harus berupa link `raw.githubusercontent.com`.')
+			return m.reply('Gunakan URL dari raw.githubusercontent.com')
 		}
 
-		const relativePath = url.split('/master/')[1] // ambil path setelah /master/
-		if (!relativePath) return m.reply('Gagal mengambil path dari URL.')
+		const relativePath = url.split('/master/')[1] // contoh: media/plugins/maker-brat.js
+		if (!relativePath) return m.reply('URL tidak valid.')
 
-		const fullPath = path.join(__dirname, relativePath)
+		const rootDir = path.resolve(__dirname, '..') // keluar dari /connect
+		const targetPath = path.join(rootDir, relativePath)
 
-		// Pastikan folder-nya ada
-		fs.mkdirSync(path.dirname(fullPath), { recursive: true })
+		// Pastikan folder tujuan ada
+		fs.mkdirSync(path.dirname(targetPath), { recursive: true })
 
 		const { data } = await axios.get(url)
-		fs.writeFileSync(fullPath, data, 'utf-8')
+		fs.writeFileSync(targetPath, data, 'utf-8')
 
-		m.reply(`✅ Berhasil mengupdate *${relativePath}*\n\nSilakan restart bot jika diperlukan.`)
+		m.reply(`✅ Berhasil update *${relativePath}*\nLokasi: ${targetPath}\n\n${relativePath.endsWith('xZiyy.js') ? 'Silakan restart bot untuk menerapkan update ini.' : 'Perubahan langsung aktif (jika require baru dipanggil).'} `)
 	} catch (e) {
 		console.error(e)
-		m.reply('Gagal mengupdate. Cek URL atau struktur folder-nya.')
+		m.reply('❌ Gagal update. Cek URL atau struktur folder.')
 	}
 }
 break
