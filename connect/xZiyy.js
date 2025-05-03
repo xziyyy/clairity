@@ -3128,6 +3128,7 @@ break;
 			}
 			break
 case 'update': {
+    if (!isCreator) return reply(mess.owner)
 	if (!text) return m.reply('Masukkan URL raw GitHub yang ingin diupdate!')
 
 	const axios = require('axios')
@@ -3140,13 +3141,12 @@ case 'update': {
 			return m.reply('Gunakan URL dari raw.githubusercontent.com')
 		}
 
-		const relativePath = url.split('/master/')[1] // contoh: media/plugins/maker-brat.js
+		const relativePath = url.split('/master/')[1]
 		if (!relativePath) return m.reply('URL tidak valid.')
 
-		const rootDir = path.resolve(__dirname, '..') // keluar dari /connect
+		const rootDir = path.resolve(__dirname, '..')
 		const targetPath = path.join(rootDir, relativePath)
 
-		// Pastikan folder tujuan ada
 		fs.mkdirSync(path.dirname(targetPath), { recursive: true })
 
 		const { data } = await axios.get(url)
@@ -3159,7 +3159,7 @@ case 'update': {
 	}
 }
 break
-case 'helloini':{
+case 'tesupdate':{
 reply('succes')
 }
 break
