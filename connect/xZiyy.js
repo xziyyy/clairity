@@ -3255,6 +3255,281 @@ break;
 				}
 			}
 			break
+case 'autoupdate': {
+    if (!isCreator) return reply(mess.owner)    
+      const config = {
+        owner: 'xziyyy',
+        repo: 'clairity',
+        branch: 'master',
+        directories: [
+            'connect',
+            'library',
+            'media/plugins'
+        ]
+    }
+    
+    m.reply(`🔄 Memulai proses update otomatis dari ${config.owner}/${config.repo}...`)
+    
+    async function getDirectoryContents(directory) {
+        try {
+            const url = `https://api.github.com/repos/${config.owner}/${config.repo}/contents/${directory}?ref=${config.branch}`
+            const { data } = await axios.get(url)
+            return data
+        } catch (error) {
+            console.error(`Error fetching directory ${directory}:`, error.message)
+            return []
+        }
+    }
+    
+    async function updateFile(item) {
+        try {
+            if (item.type !== 'file' || !item.download_url) {
+                return { success: false, path: item.path, error: 'Bukan file atau tidak ada download URL' }
+            }
+            
+
+            const rootDir = path.resolve(__dirname, '..')
+            const targetPath = path.join(rootDir, item.path)
+            
+            fs.mkdirSync(path.dirname(targetPath), { recursive: true })
+            
+            const { data } = await axios.get(item.download_url)
+            fs.writeFileSync(targetPath, data, 'utf-8')
+            
+            return { success: true, path: item.path }
+        } catch (error) {
+            console.error(`Error updating ${item.path}:`, error.message)
+            return { success: false, path: item.path, error: error.message }
+        }
+    }
+    
+    async function processUpdate() {
+        let totalFiles = 0
+        let updatedFiles = 0
+        let failedFiles = 0
+        let needsRestart = false
+        const results = []
+        
+        try {
+            for (const directory of config.directories) {
+                const contents = await getDirectoryContents(directory)
+
+                for (const item of contents) {
+                    totalFiles++
+                    
+                    if (item.type === 'dir') {
+                        continue
+                    }
+                    
+                    // Update file
+                    const result = await updateFile(item)
+                    results.push(result)
+                    
+                    if (result.success) {
+                        updatedFiles++
+                        // cek kebutuhan restart
+                        if (item.path.startsWith('library/') || item.path.startsWith('media/plugins/')) {
+                            needsRestart = true
+                        }
+                    } else {
+                        failedFiles++
+                    }
+                }
+            }
+            
+            let report = `✅ *Update Selesai*\n\n`
+            report += `📊 *Statistik*:\n`
+            report += `- Total file: ${totalFiles}\n`
+            report += `- Berhasil diupdate: ${updatedFiles}\n`
+            report += `- Gagal diupdate: ${failedFiles}\n\n`
+            
+            if (updatedFiles > 0) {
+                report += `📄 *Files Updated*:\n`
+                let fileList = results
+                    .filter(r => r.success)
+                    .map(r => `- ${r.path}`)
+                    .join('\n')
+                
+                if (fileList.length > 1000) {
+                    const files = fileList.split('\n').slice(0, 15)
+                    fileList = files.join('\n') + '\n- ... dan file lainnya'
+                }
+                
+                report += fileList + '\n\n'
+            }
+            
+            if (failedFiles > 0) {
+                report += `❌ *Files Failed*:\n`
+                const failedList = results
+                    .filter(r => !r.success)
+                    .map(r => `- ${r.path}: ${r.error}`)
+                    .join('\n')
+                report += failedList + '\n\n'
+            }
+            
+            if (needsRestart) {
+                report += `⚠️ *PENTING*: File di direktori library atau plugins telah diupdate. Silakan restart bot untuk menerapkan perubahan.`
+            } else {
+                report += `ℹ️ Tidak ada file yang memerlukan restart, perubahan sudah aktif.`
+            }
+            
+            return report
+            
+        } catch (error) {
+            console.error('Error in processUpdate:', error)
+            return `❌ Terjadi kesalahan saat update: ${error.message}`
+        }
+    }
+    
+    processUpdate()
+        .then(report => {
+            m.reply(report)
+        })
+        .catch(error => {
+            m.reply(`❌ Terjadi kesalahan: ${error.message}`)
+        })
+}
+break
+/*
+case 'autoupdate': {
+    if (!isCreator) return reply(mess.owner)
+    
+    const axios = require('axios')
+    const fs = require('fs')
+    const path = require('path')
+    
+    // Configurasi repository
+    const config = {
+        owner: 'xziyyy',
+        repo: 'clairity',
+        branch: 'master',
+        directories: [
+            'connect',
+            'library',
+            'media/plugins'
+        ]
+    }
+    
+    m.reply(`🔄 Memulai proses update otomatis dari ${config.owner}/${config.repo}...`)
+    
+    async function getDirectoryContents(directory) {
+        try {
+            const url = `https://api.github.com/repos/${config.owner}/${config.repo}/contents/${directory}?ref=${config.branch}`
+            const { data } = await axios.get(url)
+            return data
+        } catch (error) {
+            console.error(`Error fetching directory ${directory}:`, error.message)
+            return []
+        }
+    }
+    
+    async function updateFile(item) {
+        try {
+            if (item.type !== 'file' || !item.download_url) {
+                return { success: false, path: item.path, error: 'Bukan file atau tidak ada download URL' }
+            }
+            
+            const rootDir = path.resolve(__dirname, '..')
+            const targetPath = path.join(rootDir, item.path)
+            
+            fs.mkdirSync(path.dirname(targetPath), { recursive: true })
+            
+            const { data } = await axios.get(item.download_url)
+            fs.writeFileSync(targetPath, data, 'utf-8')
+            
+            return { success: true, path: item.path }
+        } catch (error) {
+            console.error(`Error updating ${item.path}:`, error.message)
+            return { success: false, path: item.path, error: error.message }
+        }
+    }
+    
+    async function processUpdate() {
+        let totalFiles = 0
+        let updatedFiles = 0
+        let failedFiles = 0
+        let needsRestart = false
+        const results = []
+        
+        try {
+            for (const directory of config.directories) {
+                const contents = await getDirectoryContents(directory)
+                
+                for (const item of contents) {
+                    totalFiles++
+                    
+                    if (item.type === 'dir') {
+                        continue
+                    }
+                    const result = await updateFile(item)
+                    results.push(result)
+                    
+                    if (result.success) {
+                        updatedFiles++
+                       if (item.path.endsWith('xZiyy.js')) {
+                            needsRestart = true
+                        }
+                    } else {
+                        failedFiles++
+                    }
+                }
+            }
+            
+
+            let report = `✅ *Update Selesai*\n\n`
+            report += `📊 *Statistik*:\n`
+            report += `- Total file: ${totalFiles}\n`
+            report += `- Berhasil diupdate: ${updatedFiles}\n`
+            report += `- Gagal diupdate: ${failedFiles}\n\n`
+            
+            if (updatedFiles > 0) {
+                report += `📄 *Files Updated*:\n`
+                let fileList = results
+                    .filter(r => r.success)
+                    .map(r => `- ${r.path}`)
+                    .join('\n')
+                
+                if (fileList.length > 1000) {
+                    const files = fileList.split('\n').slice(0, 15)
+                    fileList = files.join('\n') + '\n- ... dan file lainnya'
+                }
+                
+                report += fileList + '\n\n'
+            }
+            
+            if (failedFiles > 0) {
+                report += `❌ *Files Failed*:\n`
+                const failedList = results
+                    .filter(r => !r.success)
+                    .map(r => `- ${r.path}: ${r.error}`)
+                    .join('\n')
+                report += failedList + '\n\n'
+            }
+            
+            if (needsRestart) {
+                report += `⚠️ *PENTING*: File utama (xZiyy.js) telah diupdate. Silakan restart bot untuk menerapkan perubahan.`
+            } else {
+                report += `ℹ️ Tidak ada file utama yang diupdate, perubahan sudah aktif.`
+            }
+            
+            return report
+            
+        } catch (error) {
+            console.error('Error in processUpdate:', error)
+            return `❌ Terjadi kesalahan saat update: ${error.message}`
+        }
+    }
+
+    processUpdate()
+        .then(report => {
+            m.reply(report)
+        })
+        .catch(error => {
+            m.reply(`❌ Terjadi kesalahan: ${error.message}`)
+        })
+}
+break
+*/
 case 'update': {
     if (!isCreator) return reply(mess.owner)
 	if (!text) return m.reply('Masukkan URL raw GitHub yang ingin diupdate!')
@@ -3291,6 +3566,7 @@ case 'tesupdate':{
 reply('Already Up To date: 5, Mei, 2025')
 }
 break
+
 case 'rumaysho': {
   if (!text) return reply(`Gunakan dengan cara ${command} *topik*\n\n_Contoh_\n\n${command} Jum'at`);
 
@@ -4811,7 +5087,7 @@ break
           return tebakgambar[from] || tebakkata[from] || tebakkalimat[from] || tebaklirik[from] ||
             tebaktebakan[from] || tebakbendera[from] || tebakbendera2[from] || tebakkabupaten[from] ||
             tebakkimia[from] || tebakasahotak[from] || tebaksiapakahaku[from] || tebaksusunkata[from] ||
-            tebaktekateki[from] || tebakjkt48[from] || tebakjktff[from] || tebakjktml[from];
+            tebaktekateki[from] || tebakjkt48[from] || tebakff[from] || tebakml[from];
         }
         if (isGameActive()) {
           return reply("Masih Ada Sesi Permainan Yang Belum Diselesaikan!");
