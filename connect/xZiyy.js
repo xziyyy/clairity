@@ -51,6 +51,7 @@ const pino = require('pino')
 const { pipeline } = require('stream')
 const ytdl = require('ytdl-core')
 const speed = require('performance-now')
+let BodyForm = require("form-data")
 const more = String.fromCharCode(8206); 
 const readmore = more.repeat(4001);
 const {
@@ -73,7 +74,6 @@ const { toAudio,
   addExifAvatar } = require('../library/converter')
   
 
-const { UploadFileUgu } = require('../library/uploader')
 const { bytesToSize, getRandomFile, smsg, checkBandwidth, sleep, formatSize, getRandom, format, getBuffer, isUrl, jsonformat, nganuin, pickRandom, runtime, clockString, shorturl, formatp, fetchJson, color, getGroupAdmins } = require("../library/myfunc");
 const { addExif } = require('../library/exif')
 const yetedln = require("../media/scraper/yetedln")
@@ -385,7 +385,29 @@ const reply = async (teks) => {
         await plugin.exec(m, from, { q, fuzzy, args, command, prefix, reply, quoted, mime, pushname, getBuffer })
       }
     }
-    
+
+
+async function UploadFileUgu(input) {
+  return new Promise(async (resolve, reject) => {
+    const form = new BodyForm();
+    form.append("files[]", fs.createReadStream(input));
+    await axios({
+      url: "https://uguu.se/upload.php",
+      method: "POST",
+      headers: {
+        "User-Agent":
+          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36",
+        ...form.getHeaders(),
+      },
+      data: form,
+    })
+      .then((data) => {
+        resolve(data.data.files[0]);
+      })
+      .catch((err) => reject(err));
+  });
+}
+
     // Afk
     for (let jid of mentionUser) {
       if (m.key.fromMe) return
@@ -3075,15 +3097,13 @@ break
           if (!text) return reply(`Usage: ${prefix + command} bawah|atas\n\ncontoh !smeme hallo|dek`)
           atas = text.split('|')[0] ? text.split('|')[0] : '-'
           bawah = text.split('|')[1] ? text.split('|')[1] : '-'
-          let media = await fuzzy.downloadAndSaveMediaMessage(quoted, makeid(5))
-          let url = await exec(`curl -F "reqtype=fileupload" -F "userhash=" -F "fileToUpload=@${media}" https://catbox.moe/user/api.php`, (error, stdout, stderr) => {
-          meme = `https://api.memegen.link/images/custom/${encodeURIComponent(atas)}/${encodeURIComponent(bawah)}.png?background=${stdout}`
+          mee = await fuzzy.downloadAndSaveMediaMessage(quoted)
+          mem = await UploadFileUgu(mee)
+          meme = `https://api.memegen.link/images/custom/${encodeURIComponent(atas)}/${encodeURIComponent(bawah)}.png?background=${mem.url}`
           memek = await fuzzy.sendImageAsSticker(m.chat, meme, m, {
             packname: global.packname,
             author: global.author
           })
-          })         
-
         }
         else {
           reply(`Kirim/Balas Gambar Dengan Caption ${prefix + command} text1|text2`)
