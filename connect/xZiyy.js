@@ -2798,7 +2798,6 @@ break;
       }
       break
       case 'spam-pairing': {
-        if (!isPremium) return reply('onlu prem')
         if (!text) return reply(`*Example:* ${prefix + command} +628xxxxxx|150`)
         let [peenis, pepekk = "200"] = text.split("|")
 
