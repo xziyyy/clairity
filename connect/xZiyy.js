@@ -3078,11 +3078,12 @@ break
           let media = await fuzzy.downloadAndSaveMediaMessage(quoted, makeid(5))
           let url = await exec(`curl -F "reqtype=fileupload" -F "userhash=" -F "fileToUpload=@${media}" https://catbox.moe/user/api.php`, (error, stdout, stderr) => {
           meme = `https://api.memegen.link/images/custom/${encodeURIComponent(atas)}/${encodeURIComponent(bawah)}.png?background=${stdout}`
-          })          
           memek = await fuzzy.sendImageAsSticker(m.chat, meme, m, {
             packname: global.packname,
             author: global.author
           })
+          })         
+
         }
         else {
           reply(`Kirim/Balas Gambar Dengan Caption ${prefix + command} text1|text2`)
