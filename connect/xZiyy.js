@@ -3075,9 +3075,10 @@ break
           if (!text) return reply(`Usage: ${prefix + command} bawah|atas\n\ncontoh !smeme hallo|dek`)
           atas = text.split('|')[0] ? text.split('|')[0] : '-'
           bawah = text.split('|')[1] ? text.split('|')[1] : '-'
-          mee = await fuzzy.downloadAndSaveMediaMessage(quoted)
-          mem = await UploadFileUgu(mee)
-          meme = `https://api.memegen.link/images/custom/${encodeURIComponent(atas)}/${encodeURIComponent(bawah)}.png?background=${mem.url}`
+          let media = await fuzzy.downloadAndSaveMediaMessage(quoted, makeid(5))
+          let url = await exec(`curl -F "reqtype=fileupload" -F "userhash=" -F "fileToUpload=@${media}" https://catbox.moe/user/api.php`, (error, stdout, stderr) => {
+          meme = `https://api.memegen.link/images/custom/${encodeURIComponent(atas)}/${encodeURIComponent(bawah)}.png?background=${stdout}`
+          })          
           memek = await fuzzy.sendImageAsSticker(m.chat, meme, m, {
             packname: global.packname,
             author: global.author
