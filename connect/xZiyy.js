@@ -5314,8 +5314,6 @@ break
             reply("Gagal mengambil data dari API.");
           }
         } else if (args[0] === 'ff') {
-          if (isGame(sender, isCreator, gcount, glimit)) return m.reply(`Limit game kamu Telah Habis, Limit kamu sudah habis silahkan kirim ${prefix}limit untuk cek limit, dan !buyglimit untuk membeli game limit`)
-          gameAdd(sender, glimit)
           
           let response = await fetchJson('https://api.siputzx.my.id/api/games/karakter-freefire');
           if (response.status) {
@@ -5333,11 +5331,7 @@ break
             }
           }
           } else if (args[0] === 'ml') {
-  if (isGame(sender, isCreator, gcount, glimit)) {
-    return m.reply(`Limit game kamu telah habis.\nKetik *${prefix}limit* untuk cek limit.\nGunakan *!buyglimit* untuk membeli limit tambahan.`);
-  }
 
-  gameAdd(sender, glimit);
 
   try {
     let response = await fetchJson('https://api.siputzx.my.id/api/games/tebakheroml');
