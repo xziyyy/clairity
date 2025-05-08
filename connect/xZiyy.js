@@ -2441,199 +2441,145 @@ break;
         }
       }
       break;
-case 'tiksave': {
-  reply('Tunggu sebentar, sedang mengunduh video TikTok...');
+      case 'tt':
+      case 'tiktok':
+      case 'tiksave':
+      case 'ttmp4':
+      case 'ttsv': {
 
-  async function fetchTikTokVideo(url) {
-    const res = await axios.get(`${apiUrlw}/api/tiksave?url=${encodeURIComponent(url)}`);
-    return res.data;
-  }
-
-  const tiktokUrl = args[0];
-  if (!tiktokUrl) {
-    return m.reply('Masukkan URL TikTok yang ingin diunduh.');
-  }
-
-  try {
-    const videoData = await fetchTikTokVideo(tiktokUrl);
-
-    if (!videoData.success) {
-      return m.reply('Gagal mengunduh video. Pastikan URL benar.');
-    }
-
-    const {
-      title,
-      videoData: {
-        thumbnail,
-        downloadLinks
-      }
-    } = videoData.data;
-
-    const downloadLink = downloadLinks[0].link; // Mendapatkan link unduhan pertama
-
-    await fuzzy.sendFile(m.chat, downloadLink, `ttsave.mp4`, `Nihh".`, m);
-  } catch (error) {
-    console.error('Error fetching TikTok video:', error);
-    m.reply('Maaf, terjadi kesalahan saat mengunduh video.');
-  }
-
-}
-break;
-
-
-case 'tiktok':
-case 'tt': {
-    const headers = {
-        authority: "ttsave.app",
-        accept: "application/json, text/plain, */*",
-        origin: "https://ttsave.app",
-        referer: "https://ttsave.app/en",
-        "user-agent": "Postify/1.0.0",
-    };
-
-    const ttsave = {
-        submit: async function(url, referer) {
-            const headerx = { ...headers, referer };
-            const data = { query: url, language_id: "1" };
-            return axios.post("https://ttsave.app/download", data, { headers: headerx });
-        },
-
-        parse: function($) {
-            const uniqueId = $("#unique-id").val();
-            const nickname = $("h2.font-extrabold").text();
-            const profilePic = $("img.rounded-full").attr("src");
-            const username = $("a.font-extrabold.text-blue-400").text();
-            const description = $("p.text-gray-600").text();
-
-            const dlink = {
-                nowm: $("a.w-full.text-white.font-bold").first().attr("href"),
-                wm: $("a.w-full.text-white.font-bold").eq(1).attr("href"),
-                audio: $("a[type='audio']").attr("href"),
-                profilePic: $("a[type='profile']").attr("href"),
-                cover: $("a[type='cover']").attr("href"),
-            };
-
-            const stats = {
-                plays: "",
-                likes: "",
-                comments: "",
-                shares: "",
-            };
-
-            $(".flex.flex-row.items-center.justify-center").each((index, element) => {
-                const $element = $(element);
-                const svgPath = $element.find("svg path").attr("d");
-                const value = $element.find("span.text-gray-500").text().trim();
-
-                if (svgPath && svgPath.startsWith("M10 18a8 8 0 100-16")) {
-                    stats.plays = value;
-                } else if (svgPath && svgPath.startsWith("M3.172 5.172a4 4 0 015.656")) {
-                    stats.likes = value || "0";
-                } else if (svgPath && svgPath.startsWith("M18 10c0 3.866-3.582")) {
-                    stats.comments = value;
-                } else if (svgPath && svgPath.startsWith("M17.593 3.322c1.1.128")) {
-                    stats.shares = value;
-                }
+        const qs = require('qs');
+        const tiksave = {
+          getData: async (url) => {
+            const apiUrl = 'https://tiksave.io/api/ajaxSearch';
+            const data = qs.stringify({
+              q: url,
+              lang: 'id'
             });
-
-            const songTitle = $(".flex.flex-row.items-center.justify-center.gap-1.mt-5")
-                .find("span.text-gray-500")
-                .text()
-                .trim();
-
-            const slides = $("a[type='slide']")
-                .map((i, el) => ({
-                    number: i + 1,
-                    url: $(el).attr("href"),
-                }))
-                .get();
-
-            return {
-                uniqueId,
-                nickname,
-                profilePic,
-                username,
-                description,
-                dlink,
-                stats,
-                songTitle,
-                slides,
+            const config = {
+              headers: {
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+                'Accept': '*/*',
+                'User-Agent': 'MyApp/1.0',
+                'Referer': 'https://tiksave.io/en',
+                'X-Requested-With': 'XMLHttpRequest'
+              }
             };
-        },
 
-        video: async function(link) {
             try {
-                const response = await this.submit(link, "https://ttsave.app/en");
-                const $ = cheerio.load(response.data);
-                const result = this.parse($);
+              const response = await axios.post(apiUrl, data, config);
+              const html = response.data.data;
+              const $ = cheerio.load(html);
+              const thumbnail = $('.thumbnail img').attr('src');
+              const title = $('.tik-left h3').text().trim();
+              const downloadLinks = [];
 
-                if (result.slides && result.slides.length > 0) {
-                    return {
-                        type: "slide",
-                        ...result,
-                        audioUrl: result.dlink.audio
-                    };
-                }
+              $('.dl-action a').each((index, element) => {
+                const link = $(element).attr('href');
+                const label = $(element).text().trim();
+                downloadLinks.push({
+                  label,
+                  link
+                });
+              });
+
+              return {
+                thumbnail,
+                title,
+                downloadLinks
+              };
+            }
+            catch (error) {
+              console.error('Error:', error);
+              throw error;
+            }
+          },
+
+          download: async (url) => {
+            try {
+              const videoData = await tiksave.getData(url);
+              if (videoData && videoData.downloadLinks.length) {
+                const audioUrl = videoData.downloadLinks.find(link => link.label === 'Download MP3')?.link;
 
                 return {
-                    type: "video",
-                    ...result,
-                    videoInfo: {
-                        nowm: result.dlink.nowm,
-                        wm: result.dlink.wm,
-                    },
-                    audioUrl: result.dlink.audio
+                  videoData,
+                  audioUrl
                 };
-            } catch (error) {
-                console.error(error);
-                throw error;
+              }
+              else {
+                throw new Error('Link unduhan tidak tersedia.');
+              }
             }
-        },
-    };
-
-    if (!text) {
-        return reply(`gunakan url valid contoh ${prefix + command} link`);
-    }
-
-    try {
-        const videoResult = await ttsave.video(text);
-        const { type, videoInfo, slides, audioUrl } = videoResult;
-
-        // Handle slides with audio
-        if (type === "slide") {
-            // Send all slides
-            for (let slide of slides) {
-                await fuzzy.sendFile(m.chat, slide.url, `slide-${slide.number}.jpg`, "", m);
+            catch (error) {
+              console.error('Error:', error);
+              throw error;
             }
+          }
+        };
+
+
+        try {
+          // Memeriksa apakah teks yang dimasukkan adalah URL valid
+          if (!text.startsWith('http')) return reply("Masukkan URL yang valid.");
+
+          // Mendapatkan data unduhan TikTok
+          let {
+            videoData,
+            audioUrl
+          } = await tiksave.download(text);
+
+          if (videoData.downloadLinks.length) {
+            await fuzzy.sendMessage(m.chat, {
+              video: {
+                url: videoData.downloadLinks[0].link,
+              },
+              caption: `🎥 ${videoData.title}`,
+              fileName: `tiktok.mp4`,
+              mimetype: 'video/mp4'
+            });
+          }
+          else {
+            reply("Video tidak tersedia.");
+          }
+
+          // audio
+          let res = await tiktok(`${args[0]}`)
+          fuzzy.sendMessage(m.chat, {
+            audio: {
+              url: res.audio
+            },
+            fileName: `tiktok.mp3`,
+            mimetype: 'audio/mp4'
+          })
+
 
         }
-        // Handle video with audio
-        else if (type === "video") {
-            if (videoInfo.nowm) {
-                // Send video
-                await fuzzy.sendFile(m.chat, videoInfo.nowm, "tiktok.mp4", "", m);
-                
-                // Send audio with new format
-                if (audioUrl) {
-                    let res = await tiktok(text);
-                    await fuzzy.sendMessage(m.chat, {
-                        audio: {
-                            url: res.audio
-                        },
-                        fileName: `tiktok.mp3`,
-                        mimetype: 'audio/mp4'
-                    });
-                }
-            } else {
-                reply("Gagal mengambil video tanpa watermark.");
-            }
+        catch (error) {
+          console.error("Error fetching TikTok data:", error);
+          reply("Maaf, terjadi kesalahan saat mengambil data TikTok.");
         }
-    } catch (error) {
-        console.error(error);
-        reply("Terjadi kesalahan saat memproses permintaan audio.", m);
-    }
+
+      }
+      break;
+      
+
+case 'ttmp3':{
+          if (!text.startsWith('http')) return reply("Masukkan URL yang valid.");
+        try {
+          let res = await tiktok(`${args[0]}`)
+          fuzzy.sendMessage(m.chat, {
+            audio: {
+              url: res.audio
+            },
+            fileName: `tiktok.mp3`,
+            mimetype: 'audio/mp4'
+          })
+       } catch (error) {
+          console.error("Maaf server limit, coba lagi lain waktu", error);
+          reply("Maaf server limit, coba lagi lain waktu.");
+        }
 }
 break
+
             case 'upstatus':
 			case 'upsw': {
 				if (!isCreator) return m.reply(mess.owner)
@@ -3584,7 +3530,7 @@ case 'update': {
 }
 break
 case 'tesupdate':{
-reply('Already Up To date: 5, Mei, 2025')
+reply('Already Up To date: 8, Mei, 2025')
 }
 break
 
@@ -4008,7 +3954,7 @@ break
 				let [teks1, teks2, teks3] = text.split`|`
 				if (!teks1 || !teks2 || !teks3) return m.reply(`Example : ${prefix + command} pesan target|pesan mu|nomer/tag target`)
 				let ftelo = { key: { fromMe: false, participant: teks3.replace(/[^0-9]/g, '') + '@s.whatsapp.net', ...(m.isGroup ? { remoteJid: m.chat } : { remoteJid: teks3.replace(/[^0-9]/g, '') + '@s.whatsapp.net'})}, message: { conversation: teks1 }}
-				fuzzy.sendMessage(m.chat, { text: teks2 }, { quoted: m });
+				fuzzy.sendMessage(m.chat, { text: teks2 }, { quoted: ftelo });
 			}
 			break
       case 'cekkodam': {
