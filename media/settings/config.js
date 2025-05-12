@@ -12,12 +12,12 @@ const version = require("@whiskeysockets/baileys/package.json").version
 // contoh ['1','2','3']
 // ['1','2','3','4']
 global.ownerNumber = [`${global.owner}`,'no2','no3'] // no owner yang dapat mengakses all fitur
-global.firstbotname = "clairity" // nama depan bot kalian
+global.firstbotname = "DittBotz" // nama depan bot kalian
 global.email = "@gmail.com" // kosongkan jika tidak punya
 global.web = ".com" // kosongkan jika tidak punya
 global.location = "Banten" // isi daerah mu atau tempat tinggal mu jika tidak mau kosongkan
-global.packname = "Mayura bot" // wm yg ada di sticker
-global.author = "dibuat oleh xZiyy" // wm yg ada di sticker
+global.packname = "Ditt bot" // wm yg ada di sticker
+global.author = "dibuat oleh adit" // wm yg ada di sticker
 global.imgUrl = "https://files.catbox.moe/jzjj0n.jpg" // ubah menggunakan !setimgreply
 global.menuimgUrl = "https://files.catbox.moe/v2n8br.jpg" // ubah menggunakan !setimgmenu
 
