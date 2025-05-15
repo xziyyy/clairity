@@ -20,7 +20,7 @@ global.packname = "Mayura bot" // wm yg ada di sticker
 global.author = "dibuat oleh xZiyy" // wm yg ada di sticker
 global.imgUrl = "https://files.catbox.moe/jzjj0n.jpg" // ubah menggunakan !setimgreply
 global.menuimgUrl = "https://files.catbox.moe/v2n8br.jpg" // ubah menggunakan !setimgmenu
-global.pairing_code = false; // jika false bot akan menggunakan qr code
+global.pairing_code = true; // jika false bot akan menggunakan qr code
 
 global.linkgc = "https://chat.whatsapp.com/C9YprGwjch81wh88uCp6lu"
 
