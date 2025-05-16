@@ -11,7 +11,7 @@
   "dependencies": {
     "@ffmpeg-installer/ffmpeg": "^1.1.0",
     "@hapi/boom": "^10.0.1",
-    "@whiskeysockets/baileys": "github:xziyyy/baileys",
+    "@whiskeysockets/baileys": "github:seiren-primrose/PL-Baileys",
     "awesome-phonenumber": "^2.64.0",
     "axios": "^0.24.0",
     "cfonts": "^3.2.0",
