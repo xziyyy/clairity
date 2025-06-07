@@ -10,7 +10,8 @@ pkg install nodejs-lts
 pkg install ffmpeg -y
 git clone https://github.com/xziyyy/clairity.git
 cd clairity
-npm install
+pkg install yarn -y
+yarn
 ```
 
 [RECOMMENDED INSTALL ON TERMUX]
