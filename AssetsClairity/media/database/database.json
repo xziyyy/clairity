@@ -1,0 +1,109 @@
+{
+  "users": {
+    "6282118474499@s.whatsapp.net": {
+      "afkTime": -1,
+      "afkReason": ""
+    },
+    "6283159451487@s.whatsapp.net": {
+      "afkTime": -1,
+      "afkReason": ""
+    },
+    "6285839028471@s.whatsapp.net": {
+      "afkTime": -1,
+      "afkReason": ""
+    },
+    "6285778179570@s.whatsapp.net": {
+      "afkTime": -1,
+      "afkReason": ""
+    },
+    "994405235498@s.whatsapp.net": {
+      "afkTime": -1,
+      "afkReason": ""
+    },
+    "6285180717373@s.whatsapp.net": {
+      "afkTime": -1,
+      "afkReason": ""
+    },
+    "6287719398207@s.whatsapp.net": {
+      "afkTime": -1,
+      "afkReason": ""
+    },
+    "120363417928753369@newsletter": {
+      "afkTime": -1,
+      "afkReason": ""
+    },
+    "573143093796@s.whatsapp.net": {
+      "afkTime": -1,
+      "afkReason": ""
+    },
+    "6281259105359@s.whatsapp.net": {
+      "afkTime": -1,
+      "afkReason": ""
+    },
+    "6283831325717@s.whatsapp.net": {
+      "afkTime": -1,
+      "afkReason": ""
+    },
+    "120363408438418826@newsletter": {
+      "afkTime": -1,
+      "afkReason": ""
+    },
+    "6285702249514@s.whatsapp.net": {
+      "afkTime": -1,
+      "afkReason": ""
+    },
+    "120363323118002960@newsletter": {
+      "afkTime": -1,
+      "afkReason": ""
+    },
+    "6285813271735@s.whatsapp.net": {
+      "afkTime": -1,
+      "afkReason": ""
+    },
+    "6287781070918@s.whatsapp.net": {
+      "afkTime": -1,
+      "afkReason": ""
+    },
+    "6289530793796@s.whatsapp.net": {
+      "afkTime": -1,
+      "afkReason": ""
+    }
+  },
+  "chats": {
+    "6282118474499@s.whatsapp.net": {
+      "welcome": false,
+      "onlyadmin": false
+    },
+    "120363401089072498@g.us": {
+      "welcome": false,
+      "onlyadmin": false
+    },
+    "6283159451487@s.whatsapp.net": {
+      "welcome": false,
+      "onlyadmin": false
+    },
+    "120363417928753369@newsletter": {
+      "welcome": false,
+      "onlyadmin": false
+    },
+    "120363408438418826@newsletter": {
+      "welcome": false,
+      "onlyadmin": false
+    },
+    "6285702249514@s.whatsapp.net": {
+      "welcome": false,
+      "onlyadmin": false
+    },
+    "120363323118002960@newsletter": {
+      "welcome": false,
+      "onlyadmin": false
+    }
+  },
+  "database": {},
+  "game": {},
+  "settings": {
+    "6282118474499@s.whatsapp.net": {}
+  },
+  "others": {},
+  "sticker": {}
+}
